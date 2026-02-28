@@ -4,14 +4,6 @@ AI-assisted management of [reqstool](https://github.com/reqstool/reqstool-python
 
 Provides config-driven skills and commands that let AI coding assistants help you manage requirements, verification cases, and traceability filters.
 
-## Supported AI Tools
-
-| Tool | Status | Directory |
-|------|--------|-----------|
-| [Claude Code](https://claude.ai/code) | Supported | `claude/` |
-| GitHub Copilot | Planned | `copilot/` |
-| Cursor | Planned | `cursor/` |
-
 ## Repository Structure
 
 ```
@@ -58,7 +50,7 @@ reqstool-ai/
 
 ```bash
 # Clone the repo
-git clone https://github.com/jimisola/reqstool-ai.git
+git clone https://github.com/reqstool/reqstool-ai.git
 
 # Install reqstool skills only
 ./reqstool-ai/install.sh /path/to/your-project
@@ -119,7 +111,7 @@ All skills read `.reqstool-ai.yaml` from the project root at runtime. This confi
 ## Prerequisites
 
 - [reqstool](https://github.com/reqstool/reqstool-python) (`pipx install reqstool`)
-- An AI coding tool (currently Claude Code; more planned)
+- [Claude Code](https://claude.ai/code)
 - [OpenSpec](https://github.com/openspec-dev/openspec) (optional, for spec integration)
 
 ## License
