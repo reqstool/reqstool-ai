@@ -96,6 +96,12 @@ if [[ "$TOOL" == "claude" ]]; then
     cp "$TOOL_DIR/commands/reqstool/$cmd.md" "$dest/$cmd.md"
     echo "  Installed command: reqstool/$cmd"
   done
+
+  # Copy core conventions (always — not gated by --with-openspec)
+  cp "$SCRIPT_DIR/reqstool-conventions.md" "$CLAUDE_DIR/reqstool-conventions.md"
+  echo "  Installed: .claude/reqstool-conventions.md"
+  cp "$SCRIPT_DIR/reqstool-annotation-conventions.md" "$CLAUDE_DIR/reqstool-annotation-conventions.md"
+  echo "  Installed: .claude/reqstool-annotation-conventions.md"
 fi
 
 # --- Shared config (tool-neutral) ---
@@ -131,17 +137,16 @@ echo ""
 echo "Next steps:"
 echo "  1. Edit .reqstool-ai.yaml with your project's URN, paths, and module prefixes"
 
+if [[ "$TOOL" == "claude" ]]; then
+  echo "  2. Add the following to your project's CLAUDE.md:"
+  echo ""
+  echo "     ## reqstool"
+  echo ""
+  echo "     When working with reqstool, **always read \`.claude/reqstool-conventions.md\` first**."
+fi
+
 if [[ "$WITH_OPENSPEC" == true ]]; then
   if [[ "$TOOL" == "claude" ]]; then
-    echo "  2. Add the following to your project's CLAUDE.md:"
-    echo ""
-    echo "     ## OpenSpec + reqstool Integration"
-    echo ""
-    echo "     When creating or modifying OpenSpec spec.md files, **always read"
-    echo "     \`.claude/reqstool-openspec-conventions.md\` first**. reqstool is the SSOT"
-    echo "     for requirements and verification scenarios -- spec.md files reference IDs"
-    echo "     only, never duplicating requirement text or GIVEN/WHEN/THEN steps. Always"
-    echo "     validate with \`openspec validate --all --strict\`."
     echo ""
     echo "  3. Add the reqstool rules to your openspec/config.yaml (see openspec/config-rules.yaml)"
   fi

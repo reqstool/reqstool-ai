@@ -77,6 +77,7 @@ The config defines:
    Show the user:
    - The new requirement ID and title
    - Which files were modified
+   - Remind: "Add `@Requirements({"<REQ_ID>"})` annotation to the implementation method/function (as close to the implementation as possible — see `.claude/reqstool-annotation-conventions.md`)."
    - Remind them to create a matching SVC if needed: "Run `/reqstool:add-svc` to create a verification case for this requirement."
 
 **Guardrails**

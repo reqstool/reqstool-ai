@@ -100,7 +100,7 @@ The config defines:
    Show the user:
    - The new SVC ID, linked requirement, and verification type
    - Which files were modified
-   - For automated-test SVCs, remind: "Add `@SVCs({"<SVC_ID>"})` annotation to the test method."
+   - For automated-test SVCs, remind: "Add `@SVCs({"<SVC_ID>"})` annotation to the test method/function (as close to the implementation as possible — see `.claude/reqstool-annotation-conventions.md`)."
 
 **Guardrails**
 - Validate that the linked requirement ID exists in `<system.path>/requirements.yml`
