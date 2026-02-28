@@ -51,11 +51,36 @@ The system SHALL pass <SVC_ID>.
 ### Requirement: CORE_0002
 The system SHALL implement CORE_0002.
 
-#### Scenario: SVC_CORE_0002a
-The system SHALL pass SVC_CORE_0002a.
+#### Scenario: SVC_CORE_0002.1
+The system SHALL pass SVC_CORE_0002.1.
 
-#### Scenario: SVC_CORE_0002b
-The system SHALL pass SVC_CORE_0002b.
+#### Scenario: SVC_CORE_0002.2
+The system SHALL pass SVC_CORE_0002.2.
+```
+
+### Parent requirement with children
+
+When a requirement has been decomposed (see `.claude/reqstool-decomposition-conventions.md`),
+list the parent and its children together:
+
+```markdown
+### Requirement: CLI_0004
+The system SHALL implement CLI_0004.
+
+#### Scenario: SVC_CLI_0004
+The system SHALL pass SVC_CLI_0004.
+
+### Requirement: CLI_0004.1
+The system SHALL implement CLI_0004.1.
+
+#### Scenario: SVC_CLI_0004.1
+The system SHALL pass SVC_CLI_0004.1.
+
+### Requirement: CLI_0004.2
+The system SHALL implement CLI_0004.2.
+
+#### Scenario: SVC_CLI_0004.2
+The system SHALL pass SVC_CLI_0004.2.
 ```
 
 ### Multiple requirements

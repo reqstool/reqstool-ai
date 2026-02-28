@@ -102,6 +102,8 @@ if [[ "$TOOL" == "claude" ]]; then
   echo "  Installed: .claude/reqstool-conventions.md"
   cp "$SCRIPT_DIR/reqstool-annotation-conventions.md" "$CLAUDE_DIR/reqstool-annotation-conventions.md"
   echo "  Installed: .claude/reqstool-annotation-conventions.md"
+  cp "$SCRIPT_DIR/reqstool-decomposition-conventions.md" "$CLAUDE_DIR/reqstool-decomposition-conventions.md"
+  echo "  Installed: .claude/reqstool-decomposition-conventions.md"
 fi
 
 # --- Shared config (tool-neutral) ---
