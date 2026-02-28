@@ -1,0 +1,28 @@
+# reqstool rules for openspec/config.yaml
+#
+# Add these rules to your openspec/config.yaml under the `rules:` key.
+# These ensure that OpenSpec artifacts properly reference reqstool requirements.
+#
+# Example: merge these into your existing config.yaml rules section:
+#
+# rules:
+#   proposal:
+#     - Reference reqstool requirement IDs when applicable
+#     - Keep proposals focused on a single capability
+#   specs:
+#     - "reqstool is SSOT: NEVER duplicate requirement text or GIVEN/WHEN/THEN scenarios"
+#     - "Follow conventions in .claude/reqstool-openspec-conventions.md"
+#     - "Use ### Requirement: <ID> with 'The system SHALL implement <ID>.'"
+#     - "Use #### Scenario: <SVC_ID> with 'The system SHALL pass <SVC_ID>.'"
+#     - "IDs only — no file paths. Use reqstool CLI to look up details."
+#     - "Validate with: openspec validate --all --strict"
+#   tasks:
+#     - Include the reqstool SVC IDs that the task covers
+
+specs:
+  - "reqstool is SSOT: NEVER duplicate requirement text or GIVEN/WHEN/THEN scenarios"
+  - "Follow conventions in .claude/reqstool-openspec-conventions.md"
+  - "Use ### Requirement: <ID> with 'The system SHALL implement <ID>.'"
+  - "Use #### Scenario: <SVC_ID> with 'The system SHALL pass <SVC_ID>.'"
+  - "IDs only — no file paths. Use reqstool CLI to look up details."
+  - "Validate with: openspec validate --all --strict"
