@@ -13,6 +13,9 @@ reqstool-ai/
 ├── openspec/                         # Shared OpenSpec integration
 │   ├── reqstool-openspec-conventions.md
 │   └── config-rules.yaml
+├── reqstool-conventions.md           # Entry point for all conventions
+├── reqstool-annotation-conventions.md  # @Requirements/@SVCs annotation placement
+├── reqstool-decomposition-conventions.md  # Parent-child hierarchies, dot notation, lifecycle
 ├── claude/                           # Claude Code integration
 │   ├── skills/                       # Claude Code skills
 │   │   ├── reqstool-status/
