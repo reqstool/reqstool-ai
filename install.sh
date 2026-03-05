@@ -81,29 +81,37 @@ if [[ "$TOOL" == "claude" ]]; then
   CLAUDE_DIR="$TARGET_DIR/.claude"
   mkdir -p "$CLAUDE_DIR"
 
+  # Skills and commands share names — derive command name from skill name
+  SKILLS=(reqstool-status reqstool-add-req reqstool-add-svc reqstool-sync-filters)
+
   # Copy skills
-  for skill in reqstool-status reqstool-add-req reqstool-add-svc reqstool-sync-filters; do
+  for skill in "${SKILLS[@]}"; do
     dest="$CLAUDE_DIR/skills/$skill"
+    action="Installed"
+    [[ -f "$dest/SKILL.md" ]] && action="Updated"
     mkdir -p "$dest"
     cp "$TOOL_DIR/skills/$skill/SKILL.md" "$dest/SKILL.md"
-    echo "  Installed skill: $skill"
+    echo "  $action skill: $skill"
   done
 
   # Copy commands
   dest="$CLAUDE_DIR/commands/reqstool"
   mkdir -p "$dest"
-  for cmd in status add-req add-svc sync-filters; do
+  for skill in "${SKILLS[@]}"; do
+    cmd="${skill#reqstool-}"
+    action="Installed"
+    [[ -f "$dest/$cmd.md" ]] && action="Updated"
     cp "$TOOL_DIR/commands/reqstool/$cmd.md" "$dest/$cmd.md"
-    echo "  Installed command: reqstool/$cmd"
+    echo "  $action command: reqstool/$cmd"
   done
 
   # Copy core conventions (always — not gated by --with-openspec)
-  cp "$SCRIPT_DIR/reqstool-conventions.md" "$CLAUDE_DIR/reqstool-conventions.md"
-  echo "  Installed: .claude/reqstool-conventions.md"
-  cp "$SCRIPT_DIR/reqstool-annotation-conventions.md" "$CLAUDE_DIR/reqstool-annotation-conventions.md"
-  echo "  Installed: .claude/reqstool-annotation-conventions.md"
-  cp "$SCRIPT_DIR/reqstool-decomposition-conventions.md" "$CLAUDE_DIR/reqstool-decomposition-conventions.md"
-  echo "  Installed: .claude/reqstool-decomposition-conventions.md"
+  for conv in reqstool-conventions.md reqstool-annotation-conventions.md reqstool-decomposition-conventions.md; do
+    action="Installed"
+    [[ -f "$CLAUDE_DIR/$conv" ]] && action="Updated"
+    cp "$SCRIPT_DIR/$conv" "$CLAUDE_DIR/$conv"
+    echo "  $action: .claude/$conv"
+  done
 fi
 
 # --- Shared config (tool-neutral) ---
@@ -126,8 +134,10 @@ if [[ "$WITH_OPENSPEC" == true ]]; then
 
   if [[ "$TOOL" == "claude" ]]; then
     # Copy conventions file to .claude/ (Claude reads from there)
+    action="Installed"
+    [[ -f "$TARGET_DIR/.claude/reqstool-openspec-conventions.md" ]] && action="Updated"
     cp "$SCRIPT_DIR/openspec/reqstool-openspec-conventions.md" "$TARGET_DIR/.claude/reqstool-openspec-conventions.md"
-    echo "  Installed: .claude/reqstool-openspec-conventions.md"
+    echo "  $action: .claude/reqstool-openspec-conventions.md"
   fi
 fi
 

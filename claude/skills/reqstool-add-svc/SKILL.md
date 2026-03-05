@@ -15,15 +15,7 @@ Add a new SVC and update subproject filters.
 
 **Configuration**
 
-Read `.reqstool-ai.yaml` to determine modules, paths, prefixes, URN, and revision.
-
-The config defines:
-- `urn` — the project URN used in reqstool files
-- `revision` — the current revision string for new entries
-- `system.path` — path to system-level reqstool directory
-- `modules.<name>.path` — path to each subproject's reqstool directory
-- `modules.<name>.req_prefix` — requirement ID prefix (e.g., `CORE_`) to match requirement IDs to modules
-- `modules.<name>.svc_prefix` — SVC ID prefix (e.g., `SVC_CORE_`) for this module
+Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
 
 **Steps**
 
@@ -110,7 +102,7 @@ The config defines:
    Show the user:
    - The new SVC ID, linked requirement, and verification type
    - Which files were modified
-   - For automated-test SVCs, remind: "Add `@SVCs({"<SVC_ID>"})` annotation to the test method/function (as close to the implementation as possible — see `.claude/reqstool-annotation-conventions.md`)."
+   - For automated-test SVCs, remind: "Add the appropriate `@SVCs` annotation to the test method/function (see `reqstool-annotation-conventions.md` for language-specific syntax)."
 
 **Guardrails**
 - Validate that the linked requirement ID exists in `<system.path>/requirements.yml`

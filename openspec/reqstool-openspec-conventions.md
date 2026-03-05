@@ -60,7 +60,7 @@ The system SHALL pass SVC_CORE_0002.2.
 
 ### Parent requirement with children
 
-When a requirement has been decomposed (see `.claude/reqstool-decomposition-conventions.md`),
+When a requirement has been decomposed (see `reqstool-decomposition-conventions.md`),
 list the parent and its children together:
 
 ```markdown

@@ -15,14 +15,7 @@ Sync subproject filters to match current system-level requirements and SVCs.
 
 **Configuration**
 
-Read `.reqstool-ai.yaml` to determine modules, paths, prefixes, and URN.
-
-The config defines:
-- `urn` — the project URN used in filter keys (e.g., `filters.<urn>.requirement_ids.includes`)
-- `system.path` — path to system-level reqstool directory
-- `modules.<name>.path` — path to each subproject's reqstool directory
-- `modules.<name>.req_prefix` — requirement ID prefix for this module
-- `modules.<name>.svc_prefix` — SVC ID prefix for this module
+Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
 
 **Why this is needed**
 
