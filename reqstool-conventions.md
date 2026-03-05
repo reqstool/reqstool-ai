@@ -1,5 +1,9 @@
 # reqstool Conventions
 
+> **Note:** The `.claude/` paths below refer to installed locations in target projects
+> (after running `install.sh`). Contributors to the reqstool-ai source repo will find
+> these files in the repository root.
+
 ## Source Code Annotations
 
 When writing or modifying code with reqstool annotations (`@Requirements`, `@SVCs`),
