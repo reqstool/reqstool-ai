@@ -6,7 +6,7 @@ set -euo pipefail
 # Currently supports Claude Code. Other integrations may be added in the future.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOOL="claude"
+TOOL=""
 WITH_OPENSPEC=false
 
 usage() {
@@ -16,14 +16,13 @@ Usage: $(basename "$0") [OPTIONS] <target-project-dir>
 Install reqstool-ai skills and commands into a project.
 
 Options:
-  --tool <name>     AI tool integration to install (default: claude)
+  --tool <name>     AI tool integration to install (required)
                     Available: claude
   --with-openspec   Also install OpenSpec integration (conventions + config rules)
   -h, --help        Show this help message
 
 Examples:
-  $(basename "$0") /path/to/my-project
-  $(basename "$0") --with-openspec /path/to/my-project
+  $(basename "$0") --tool claude /path/to/my-project
   $(basename "$0") --tool claude --with-openspec /path/to/my-project
 EOF
   exit 0
@@ -62,6 +61,12 @@ fi
 
 if [[ ! -d "$TARGET_DIR" ]]; then
   echo "Error: Directory does not exist: $TARGET_DIR" >&2
+  exit 1
+fi
+
+if [[ -z "$TOOL" ]]; then
+  echo "Error: --tool is required. Available: claude" >&2
+  echo "Run '$(basename "$0") --help' for usage." >&2
   exit 1
 fi
 

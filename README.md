@@ -63,14 +63,11 @@ Installed alongside skills so the AI assistant follows project-wide rules:
 # Clone the repo
 git clone https://github.com/reqstool/reqstool-ai.git
 
-# Install into your project (defaults to --tool claude)
-./reqstool-ai/install.sh /path/to/your-project
+# Install into your project
+./reqstool-ai/install.sh --tool claude /path/to/your-project
 
 # Install with OpenSpec integration
-./reqstool-ai/install.sh --with-openspec /path/to/your-project
-
-# Explicit tool selection (for future integrations)
-./reqstool-ai/install.sh --tool claude /path/to/your-project
+./reqstool-ai/install.sh --tool claude --with-openspec /path/to/your-project
 ```
 
 The installer:
