@@ -172,9 +172,11 @@ if [[ "$WITH_OPENSPEC" == true ]]; then
       print_status "Skipped" "config" "openspec/config.yaml (already contains reqstool rules)"
     else
       # Append specs rules under the existing rules: key
-      echo "" >> "$OPENSPEC_CONFIG"
-      echo "    # reqstool rules (added by reqstool-ai installer)" >> "$OPENSPEC_CONFIG"
-      sed -n 's/^  - /    - /p' "$SCRIPT_DIR/openspec/config-rules.yaml" >> "$OPENSPEC_CONFIG"
+      {
+        echo ""
+        echo "    # reqstool rules (added by reqstool-ai installer)"
+        sed -n 's/^  - /    - /p' "$SCRIPT_DIR/openspec/config-rules.yaml"
+      } >> "$OPENSPEC_CONFIG"
       print_status "Updated" "config" "openspec/config.yaml (appended reqstool specs rules)"
       echo ""
       echo "  NOTE: Please verify the rules are correctly placed under 'rules: specs:' in your config."
