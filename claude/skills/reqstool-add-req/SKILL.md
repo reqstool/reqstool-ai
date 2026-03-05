@@ -15,14 +15,7 @@ Add a new requirement to the system and update subproject filters.
 
 **Configuration**
 
-Read `.reqstool-ai.yaml` to determine modules, paths, prefixes, URN, and revision.
-
-The config defines:
-- `urn` — the project URN used in reqstool files
-- `revision` — the current revision string for new entries
-- `system.path` — path to system-level reqstool directory
-- `modules.<name>.path` — path to each subproject's reqstool directory
-- `modules.<name>.req_prefix` — requirement ID prefix for this module (e.g., `CORE_`)
+Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
 
 **Steps**
 
@@ -97,7 +90,7 @@ The config defines:
    Show the user:
    - The new requirement ID and title
    - Which files were modified
-   - Remind: "Add `@Requirements({"<REQ_ID>"})` annotation to the implementation method/function (as close to the implementation as possible — see `.claude/reqstool-annotation-conventions.md`)."
+   - Remind: "Add the appropriate `@Requirements` annotation to the implementation method/function (see `reqstool-annotation-conventions.md` for language-specific syntax)."
    - Remind them to create a matching SVC if needed: "Run `/reqstool:add-svc` to create a verification case for this requirement."
 
 **Guardrails**

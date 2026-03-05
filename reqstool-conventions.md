@@ -11,6 +11,19 @@ When decomposing requirements into parent-child hierarchies, using lifecycle sta
 or working with dot-notation IDs, follow the conventions in
 `reqstool-decomposition-conventions.md`.
 
+## Configuration (`.reqstool-ai.yaml`)
+
+All skills read `.reqstool-ai.yaml` from the project root. It defines:
+
+| Field | Description |
+|-------|-------------|
+| `urn` | Project URN used in reqstool YAML files and filter keys |
+| `revision` | Version string for new requirements and SVCs |
+| `system.path` | Path to the system-level reqstool directory (SSOT) |
+| `modules.<name>.path` | Path to a subproject's reqstool directory (contains filter files) |
+| `modules.<name>.req_prefix` | Requirement ID prefix for this module (e.g., `CORE_`) |
+| `modules.<name>.svc_prefix` | SVC ID prefix for this module (e.g., `SVC_CORE_`) |
+
 ## OpenSpec Integration
 
 When creating or modifying OpenSpec spec.md files,

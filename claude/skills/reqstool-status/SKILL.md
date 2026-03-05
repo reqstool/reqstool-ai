@@ -15,15 +15,13 @@ Show reqstool requirements traceability status.
 
 **Configuration**
 
-Read `.reqstool-ai.yaml` to determine modules, paths, and prefixes.
+Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
 
 **Steps**
 
 1. **Read config**
 
-   Read `.reqstool-ai.yaml`. It defines:
-   - `system.path` — path to the system-level reqstool directory
-   - `modules.<name>.path` — path to each subproject's reqstool directory
+   Read `.reqstool-ai.yaml`. Build a mapping of module names to their paths.
 
 2. **Determine which module(s) to report**
 
