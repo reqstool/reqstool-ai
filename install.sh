@@ -18,7 +18,7 @@ Install reqstool-ai skills and commands into a project.
 Options:
   --tool <name>     AI tool integration to install (default: claude)
                     Available: claude
-  --with-openspec   Also install OpenSpec integration (conventions file + setup instructions)
+  --with-openspec   Also install OpenSpec integration (conventions + config rules)
   -h, --help        Show this help message
 
 Examples:
@@ -112,6 +112,22 @@ if [[ "$TOOL" == "claude" ]]; then
     cp "$SCRIPT_DIR/$conv" "$CLAUDE_DIR/$conv"
     echo "  $action: .claude/$conv"
   done
+
+  # Append reqstool section to CLAUDE.md if not already present
+  CLAUDE_MD="$TARGET_DIR/CLAUDE.md"
+  MARKER="always read \`.claude/reqstool-conventions.md\` first"
+  if [[ -f "$CLAUDE_MD" ]] && grep -qF "$MARKER" "$CLAUDE_MD"; then
+    echo "  CLAUDE.md already contains reqstool section (skipped)"
+  else
+    action="Created"
+    [[ -f "$CLAUDE_MD" ]] && action="Updated"
+    # Extract the actual snippet content (everything after the --- separator)
+    {
+      echo ""
+      sed -n '/^---$/,$ { /^---$/d; p; }' "$TOOL_DIR/CLAUDE-snippet.md"
+    } >> "$CLAUDE_MD"
+    echo "  $action: CLAUDE.md (appended reqstool section)"
+  fi
 fi
 
 # --- Shared config (tool-neutral) ---
@@ -139,6 +155,29 @@ if [[ "$WITH_OPENSPEC" == true ]]; then
     cp "$SCRIPT_DIR/openspec/reqstool-openspec-conventions.md" "$TARGET_DIR/.claude/reqstool-openspec-conventions.md"
     echo "  $action: .claude/reqstool-openspec-conventions.md"
   fi
+
+  # Merge reqstool rules into openspec/config.yaml
+  OPENSPEC_CONFIG="$TARGET_DIR/openspec/config.yaml"
+  RULES_MARKER="reqstool is SSOT"
+  if [[ -f "$OPENSPEC_CONFIG" ]]; then
+    if grep -qF "$RULES_MARKER" "$OPENSPEC_CONFIG"; then
+      echo "  openspec/config.yaml already contains reqstool rules (skipped)"
+    else
+      # Read the specs rules from config-rules.yaml and indent them under the existing rules: key
+      # The rules file has a `specs:` key with items — we append each item under the existing specs: key
+      echo "" >> "$OPENSPEC_CONFIG"
+      echo "    # reqstool rules (added by reqstool-ai installer)" >> "$OPENSPEC_CONFIG"
+      # Extract just the rule lines (the - "..." entries) and indent them for the rules.specs context
+      sed -n 's/^  - /    - /p' "$SCRIPT_DIR/openspec/config-rules.yaml" >> "$OPENSPEC_CONFIG"
+      echo "  Updated: openspec/config.yaml (appended reqstool specs rules)"
+      echo ""
+      echo "  NOTE: The reqstool rules were appended to openspec/config.yaml."
+      echo "        Please verify they are correctly placed under 'rules: specs:' in your config."
+    fi
+  else
+    echo "  openspec/config.yaml not found — skipping rules merge"
+    echo "  When you create openspec/config.yaml, add the rules from openspec/config-rules.yaml"
+  fi
 fi
 
 # --- Done ---
@@ -148,18 +187,3 @@ echo "Installation complete!"
 echo ""
 echo "Next steps:"
 echo "  1. Edit .reqstool-ai.yaml with your project's URN, paths, and module prefixes"
-
-if [[ "$TOOL" == "claude" ]]; then
-  echo "  2. Add the following to your project's CLAUDE.md:"
-  echo ""
-  echo "     ## reqstool"
-  echo ""
-  echo "     When working with reqstool, **always read \`.claude/reqstool-conventions.md\` first**."
-fi
-
-if [[ "$WITH_OPENSPEC" == true ]]; then
-  if [[ "$TOOL" == "claude" ]]; then
-    echo ""
-    echo "  3. Add the reqstool rules to your openspec/config.yaml (see openspec/config-rules.yaml)"
-  fi
-fi
