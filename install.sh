@@ -81,8 +81,11 @@ if [[ "$TOOL" == "claude" ]]; then
   CLAUDE_DIR="$TARGET_DIR/.claude"
   mkdir -p "$CLAUDE_DIR"
 
+  # Skills and commands share names — derive command name from skill name
+  SKILLS=(reqstool-status reqstool-add-req reqstool-add-svc reqstool-sync-filters)
+
   # Copy skills
-  for skill in reqstool-status reqstool-add-req reqstool-add-svc reqstool-sync-filters; do
+  for skill in "${SKILLS[@]}"; do
     dest="$CLAUDE_DIR/skills/$skill"
     action="Installed"
     [[ -f "$dest/SKILL.md" ]] && action="Updated"
@@ -94,7 +97,8 @@ if [[ "$TOOL" == "claude" ]]; then
   # Copy commands
   dest="$CLAUDE_DIR/commands/reqstool"
   mkdir -p "$dest"
-  for cmd in status add-req add-svc sync-filters; do
+  for skill in "${SKILLS[@]}"; do
+    cmd="${skill#reqstool-}"
     action="Installed"
     [[ -f "$dest/$cmd.md" ]] && action="Updated"
     cp "$TOOL_DIR/commands/reqstool/$cmd.md" "$dest/$cmd.md"

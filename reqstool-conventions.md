@@ -1,21 +1,17 @@
 # reqstool Conventions
 
-> **Note:** The `.claude/` paths below refer to installed locations in target projects
-> (after running `install.sh`). Contributors to the reqstool-ai source repo will find
-> these files in the repository root.
-
 ## Source Code Annotations
 
 When writing or modifying code with reqstool annotations (`@Requirements`, `@SVCs`),
-follow the conventions in `.claude/reqstool-annotation-conventions.md`.
+follow the conventions in `reqstool-annotation-conventions.md`.
 
 ## Requirement Decomposition
 
 When decomposing requirements into parent-child hierarchies, using lifecycle states,
 or working with dot-notation IDs, follow the conventions in
-`.claude/reqstool-decomposition-conventions.md`.
+`reqstool-decomposition-conventions.md`.
 
 ## OpenSpec Integration
 
 When creating or modifying OpenSpec spec.md files,
-follow the conventions in `.claude/reqstool-openspec-conventions.md`.
+follow the conventions in `reqstool-openspec-conventions.md`.
