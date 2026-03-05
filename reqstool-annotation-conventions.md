@@ -23,7 +23,7 @@ This applies across languages. The exact granularity depends on what the languag
 ### `@Requirements` — on the implementation method
 
 ```java
-import io.github.reqstool.reqstool_java_annotations.annotations.Requirements;
+import io.github.reqstool.annotations.Requirements;
 
 public class RecipeDiscoveryEngine {
 
@@ -42,7 +42,7 @@ public class RecipeDiscoveryEngine {
 ### `@SVCs` — on the test method
 
 ```java
-import io.github.reqstool.reqstool_java_annotations.annotations.SVCs;
+import io.github.reqstool.annotations.SVCs;
 
 class RecipeDiscoveryEngineTest {
 
