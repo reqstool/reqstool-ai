@@ -39,6 +39,16 @@ reqstool-ai/
 | `reqstool:add-svc` | Add a new Software Verification Case and update filters |
 | `reqstool:sync-filters` | Sync subproject filters to match system-level IDs |
 
+### Conventions
+
+Installed alongside skills so the AI assistant follows project-wide rules:
+
+| File | Description |
+|------|-------------|
+| `reqstool-conventions.md` | Entry point — config reference, links to other convention docs |
+| `reqstool-annotation-conventions.md` | `@Requirements`/`@SVCs` placement for Java, Python, and TypeScript |
+| `reqstool-decomposition-conventions.md` | Parent-child hierarchies, dot notation, lifecycle states |
+
 ### OpenSpec Integration (Optional)
 
 | File | Description |
@@ -65,8 +75,10 @@ git clone https://github.com/reqstool/reqstool-ai.git
 The installer:
 - Copies skills to `.claude/skills/reqstool-*/`
 - Copies commands to `.claude/commands/reqstool/`
+- Copies convention files to `.claude/` (annotation, decomposition, entry-point)
 - Creates `.reqstool-ai.yaml` in the project root (config template)
-- With `--with-openspec`: copies conventions file and prints setup instructions
+- With `--with-openspec`: copies OpenSpec conventions file and prints setup instructions
+- Re-running the installer updates existing files in place
 
 ## Configuration
 
