@@ -75,6 +75,12 @@ fi
 echo "Installing reqstool-ai ($TOOL) into: $TARGET_DIR"
 echo ""
 
+# Print a tabulated status line: action, category, name
+# Usage: print_status <action> <category> <name>
+print_status() {
+  printf "  %-10s %-12s %s\n" "$1" "$2" "$3"
+}
+
 # --- Tool-specific installation ---
 
 if [[ "$TOOL" == "claude" ]]; then
@@ -91,7 +97,7 @@ if [[ "$TOOL" == "claude" ]]; then
     [[ -f "$dest/SKILL.md" ]] && action="Updated"
     mkdir -p "$dest"
     cp "$TOOL_DIR/skills/$skill/SKILL.md" "$dest/SKILL.md"
-    echo "  $action skill: $skill"
+    print_status "$action" "skill" "$skill"
   done
 
   # Copy commands
@@ -102,7 +108,7 @@ if [[ "$TOOL" == "claude" ]]; then
     action="Installed"
     [[ -f "$dest/$cmd.md" ]] && action="Updated"
     cp "$TOOL_DIR/commands/reqstool/$cmd.md" "$dest/$cmd.md"
-    echo "  $action command: reqstool/$cmd"
+    print_status "$action" "command" "reqstool/$cmd"
   done
 
   # Copy core conventions into .claude/reqstool/ (always — not gated by --with-openspec)
@@ -112,14 +118,14 @@ if [[ "$TOOL" == "claude" ]]; then
     action="Installed"
     [[ -f "$CONV_DIR/$conv" ]] && action="Updated"
     cp "$SCRIPT_DIR/$conv" "$CONV_DIR/$conv"
-    echo "  $action: .claude/reqstool/$conv"
+    print_status "$action" "convention" ".claude/reqstool/$conv"
   done
 
   # Append reqstool section to CLAUDE.md if not already present
   CLAUDE_MD="$TARGET_DIR/CLAUDE.md"
   MARKER="always read \`.claude/reqstool/reqstool-conventions.md\` first"
   if [[ -f "$CLAUDE_MD" ]] && grep -qF "$MARKER" "$CLAUDE_MD"; then
-    echo "  CLAUDE.md already contains reqstool section (skipped)"
+    print_status "Skipped" "config" "CLAUDE.md (already contains reqstool section)"
   else
     action="Created"
     [[ -f "$CLAUDE_MD" ]] && action="Updated"
@@ -128,7 +134,7 @@ if [[ "$TOOL" == "claude" ]]; then
       echo ""
       sed -n '/^---$/,$ { /^---$/d; p; }' "$TOOL_DIR/CLAUDE-snippet.md"
     } >> "$CLAUDE_MD"
-    echo "  $action: CLAUDE.md (appended reqstool section)"
+    print_status "$action" "config" "CLAUDE.md"
   fi
 fi
 
@@ -136,12 +142,10 @@ fi
 
 CONFIG_FILE="$TARGET_DIR/.reqstool-ai.yaml"
 if [[ -f "$CONFIG_FILE" ]]; then
-  echo ""
-  echo "  Config already exists: .reqstool-ai.yaml (skipped)"
+  print_status "Skipped" "config" ".reqstool-ai.yaml (already exists)"
 else
   cp "$SCRIPT_DIR/config/reqstool-ai.yaml.template" "$CONFIG_FILE"
-  echo ""
-  echo "  Created config: .reqstool-ai.yaml"
+  print_status "Created" "config" ".reqstool-ai.yaml"
 fi
 
 # --- OpenSpec integration (optional) ---
@@ -151,13 +155,13 @@ if [[ "$WITH_OPENSPEC" == true ]]; then
   echo "Installing OpenSpec integration..."
 
   if [[ "$TOOL" == "claude" ]]; then
-    # Copy conventions file to .claude/ (Claude reads from there)
+    # Copy conventions file to .claude/reqstool/
     action="Installed"
     CONV_DIR="$TARGET_DIR/.claude/reqstool"
     mkdir -p "$CONV_DIR"
     [[ -f "$CONV_DIR/reqstool-openspec-conventions.md" ]] && action="Updated"
     cp "$SCRIPT_DIR/openspec/reqstool-openspec-conventions.md" "$CONV_DIR/reqstool-openspec-conventions.md"
-    echo "  $action: .claude/reqstool/reqstool-openspec-conventions.md"
+    print_status "$action" "convention" ".claude/reqstool/reqstool-openspec-conventions.md"
   fi
 
   # Merge reqstool rules into openspec/config.yaml
@@ -165,21 +169,18 @@ if [[ "$WITH_OPENSPEC" == true ]]; then
   RULES_MARKER="reqstool is SSOT"
   if [[ -f "$OPENSPEC_CONFIG" ]]; then
     if grep -qF "$RULES_MARKER" "$OPENSPEC_CONFIG"; then
-      echo "  openspec/config.yaml already contains reqstool rules (skipped)"
+      print_status "Skipped" "config" "openspec/config.yaml (already contains reqstool rules)"
     else
-      # Read the specs rules from config-rules.yaml and indent them under the existing rules: key
-      # The rules file has a `specs:` key with items — we append each item under the existing specs: key
+      # Append specs rules under the existing rules: key
       echo "" >> "$OPENSPEC_CONFIG"
       echo "    # reqstool rules (added by reqstool-ai installer)" >> "$OPENSPEC_CONFIG"
-      # Extract just the rule lines (the - "..." entries) and indent them for the rules.specs context
       sed -n 's/^  - /    - /p' "$SCRIPT_DIR/openspec/config-rules.yaml" >> "$OPENSPEC_CONFIG"
-      echo "  Updated: openspec/config.yaml (appended reqstool specs rules)"
+      print_status "Updated" "config" "openspec/config.yaml (appended reqstool specs rules)"
       echo ""
-      echo "  NOTE: The reqstool rules were appended to openspec/config.yaml."
-      echo "        Please verify they are correctly placed under 'rules: specs:' in your config."
+      echo "  NOTE: Please verify the rules are correctly placed under 'rules: specs:' in your config."
     fi
   else
-    echo "  openspec/config.yaml not found — skipping rules merge"
+    print_status "Skipped" "config" "openspec/config.yaml (not found)"
     echo "  When you create openspec/config.yaml, add the rules from openspec/config-rules.yaml"
   fi
 fi
