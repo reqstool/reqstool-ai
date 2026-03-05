@@ -105,17 +105,19 @@ if [[ "$TOOL" == "claude" ]]; then
     echo "  $action command: reqstool/$cmd"
   done
 
-  # Copy core conventions (always — not gated by --with-openspec)
+  # Copy core conventions into .claude/reqstool/ (always — not gated by --with-openspec)
+  CONV_DIR="$CLAUDE_DIR/reqstool"
+  mkdir -p "$CONV_DIR"
   for conv in reqstool-conventions.md reqstool-annotation-conventions.md reqstool-decomposition-conventions.md; do
     action="Installed"
-    [[ -f "$CLAUDE_DIR/$conv" ]] && action="Updated"
-    cp "$SCRIPT_DIR/$conv" "$CLAUDE_DIR/$conv"
-    echo "  $action: .claude/$conv"
+    [[ -f "$CONV_DIR/$conv" ]] && action="Updated"
+    cp "$SCRIPT_DIR/$conv" "$CONV_DIR/$conv"
+    echo "  $action: .claude/reqstool/$conv"
   done
 
   # Append reqstool section to CLAUDE.md if not already present
   CLAUDE_MD="$TARGET_DIR/CLAUDE.md"
-  MARKER="always read \`.claude/reqstool-conventions.md\` first"
+  MARKER="always read \`.claude/reqstool/reqstool-conventions.md\` first"
   if [[ -f "$CLAUDE_MD" ]] && grep -qF "$MARKER" "$CLAUDE_MD"; then
     echo "  CLAUDE.md already contains reqstool section (skipped)"
   else
@@ -151,9 +153,11 @@ if [[ "$WITH_OPENSPEC" == true ]]; then
   if [[ "$TOOL" == "claude" ]]; then
     # Copy conventions file to .claude/ (Claude reads from there)
     action="Installed"
-    [[ -f "$TARGET_DIR/.claude/reqstool-openspec-conventions.md" ]] && action="Updated"
-    cp "$SCRIPT_DIR/openspec/reqstool-openspec-conventions.md" "$TARGET_DIR/.claude/reqstool-openspec-conventions.md"
-    echo "  $action: .claude/reqstool-openspec-conventions.md"
+    CONV_DIR="$TARGET_DIR/.claude/reqstool"
+    mkdir -p "$CONV_DIR"
+    [[ -f "$CONV_DIR/reqstool-openspec-conventions.md" ]] && action="Updated"
+    cp "$SCRIPT_DIR/openspec/reqstool-openspec-conventions.md" "$CONV_DIR/reqstool-openspec-conventions.md"
+    echo "  $action: .claude/reqstool/reqstool-openspec-conventions.md"
   fi
 
   # Merge reqstool rules into openspec/config.yaml

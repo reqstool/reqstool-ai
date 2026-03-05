@@ -74,7 +74,7 @@ git clone https://github.com/reqstool/reqstool-ai.git
 ```
 
 The installer:
-- Copies skills, commands, and convention files into the tool's config directory
+- Copies skills, commands, and convention files into the tool's config directory (e.g., `.claude/reqstool/`)
 - Appends the reqstool section to the tool's instructions file (e.g., `CLAUDE.md`) if not already present
 - Creates `.reqstool-ai.yaml` in the project root (config template)
 - With `--with-openspec`: copies OpenSpec conventions and merges reqstool rules into `openspec/config.yaml`
