@@ -124,7 +124,7 @@ The installer supports multiple AI tool integrations via `--tool <name>`. Curren
 
 | Tool | Flag | Status |
 |------|------|--------|
-| [Claude Code](https://claude.ai/code) | `--tool claude` (default) | Supported |
+| [Claude Code](https://claude.ai/code) | `--tool claude` | Supported |
 
 Additional tool integrations may be added in the future. Contributions welcome.
 
