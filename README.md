@@ -39,6 +39,16 @@ reqstool-ai/
 | `reqstool:add-svc` | Add a new Software Verification Case and update filters |
 | `reqstool:sync-filters` | Sync subproject filters to match system-level IDs |
 
+### Conventions
+
+Installed alongside skills so the AI assistant follows project-wide rules:
+
+| File | Description |
+|------|-------------|
+| `reqstool-conventions.md` | Entry point — config reference, links to other convention docs |
+| `reqstool-annotation-conventions.md` | `@Requirements`/`@SVCs` placement for Java, Python, and TypeScript |
+| `reqstool-decomposition-conventions.md` | Parent-child hierarchies, dot notation, lifecycle states |
+
 ### OpenSpec Integration (Optional)
 
 | File | Description |
@@ -49,24 +59,23 @@ reqstool-ai/
 
 ## Installation
 
-### Claude Code
-
 ```bash
 # Clone the repo
 git clone https://github.com/reqstool/reqstool-ai.git
 
-# Install reqstool skills only
-./reqstool-ai/install.sh /path/to/your-project
+# Install into your project
+./reqstool-ai/install.sh --tool claude /path/to/your-project
 
 # Install with OpenSpec integration
-./reqstool-ai/install.sh --with-openspec /path/to/your-project
+./reqstool-ai/install.sh --tool claude --with-openspec /path/to/your-project
 ```
 
 The installer:
-- Copies skills to `.claude/skills/reqstool-*/`
-- Copies commands to `.claude/commands/reqstool/`
+- Copies skills, commands, and convention files into the tool's config directory (e.g., `.claude/reqstool/`)
+- Appends the reqstool section to the tool's instructions file (e.g., `CLAUDE.md`) if not already present
 - Creates `.reqstool-ai.yaml` in the project root (config template)
-- With `--with-openspec`: copies conventions file and prints setup instructions
+- With `--with-openspec`: copies OpenSpec conventions and merges reqstool rules into `openspec/config.yaml`
+- Re-running the installer updates existing files in place
 
 ## Configuration
 
@@ -100,13 +109,6 @@ modules:
 | `modules.<name>.req_prefix` | Requirement ID prefix for this module (e.g., `CORE_`) |
 | `modules.<name>.svc_prefix` | SVC ID prefix for this module (e.g., `SVC_CORE_`) |
 
-## OpenSpec Setup
-
-If installed with `--with-openspec`, complete these manual steps:
-
-1. **Add to CLAUDE.md** — copy the snippet from `claude/CLAUDE-snippet.md` into your project's `CLAUDE.md`
-2. **Add rules to openspec/config.yaml** — merge the rules from `openspec/config-rules.yaml` into your `openspec/config.yaml` under the `rules:` key
-
 ## How It Works
 
 All skills read `.reqstool-ai.yaml` from the project root at runtime. This config file defines the project URN, module paths, and ID prefixes. No template substitution or build step is needed — the same skill files work across any project with a valid config.
@@ -114,8 +116,17 @@ All skills read `.reqstool-ai.yaml` from the project root at runtime. This confi
 ## Prerequisites
 
 - [reqstool](https://github.com/reqstool/reqstool-python) (`pipx install reqstool`)
-- [Claude Code](https://claude.ai/code)
 - [OpenSpec](https://github.com/openspec-dev/openspec) (optional, for spec integration)
+
+### AI Tools
+
+The installer supports multiple AI tool integrations via `--tool <name>`. Currently supported:
+
+| Tool | Flag | Status |
+|------|------|--------|
+| [Claude Code](https://claude.ai/code) | `--tool claude` | Supported |
+
+Additional tool integrations may be added in the future. Contributions welcome.
 
 ## License
 

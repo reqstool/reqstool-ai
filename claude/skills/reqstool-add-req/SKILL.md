@@ -47,7 +47,7 @@ Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
    **For child requirements** (when a parent ID is provided): Use dot notation.
    Find the highest existing child number for that parent and increment by 1.
    Format: `<PARENT_ID>.N` (e.g., `CLI_0004.1`, `CLI_0004.2`).
-   See `.claude/reqstool-decomposition-conventions.md` for when and how to decompose.
+   See `.claude/reqstool/reqstool-decomposition-conventions.md` for when and how to decompose.
 
 4. **Add the requirement to system-level file**
 

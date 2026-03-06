@@ -7,4 +7,4 @@ access to all reqstool conventions (annotation placement, OpenSpec integration, 
 
 ## reqstool
 
-When working with reqstool, **always read `.claude/reqstool-conventions.md` first**.
+When working with reqstool, **always read `.claude/reqstool/reqstool-conventions.md` first**.
