@@ -26,3 +26,6 @@ Provides config-driven skills and commands that let AI coding assistants help yo
 | Supported
 |===
 
+== License
+
+MIT License.
