@@ -1,0 +1,54 @@
+= Skills
+
+== Available skills
+
+[cols="1,2"]
+|===
+| Skill / Command | Description
+
+| `reqstool:status`
+| Show requirements traceability status for one or all modules
+
+| `reqstool:add-req`
+| Add a new requirement and update subproject filters
+
+| `reqstool:add-svc`
+| Add a new Software Verification Case and update filters
+
+| `reqstool:sync-filters`
+| Sync subproject filters to match system-level IDs
+|===
+
+== Convention files
+
+Installed alongside skills so the AI assistant follows project-wide rules:
+
+[cols="1,2"]
+|===
+| File | Description
+
+| `reqstool-conventions.md`
+| Entry point -- config reference, links to other convention docs
+
+| `reqstool-annotation-conventions.md`
+| `@Requirements`/`@SVCs` placement for Java, Python, and TypeScript
+
+| `reqstool-decomposition-conventions.md`
+| Parent-child hierarchies, dot notation, lifecycle states
+|===
+
+== OpenSpec integration (optional)
+
+[cols="1,2"]
+|===
+| File | Description
+
+| `reqstool-openspec-conventions.md`
+| Guide for writing spec.md files that reference reqstool
+
+| `config-rules.yaml`
+| Rules snippet to merge into `openspec/config.yaml`
+
+| `CLAUDE-snippet.md`
+| CLAUDE.md paragraph for OpenSpec + reqstool integration
+|===

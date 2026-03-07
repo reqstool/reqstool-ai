@@ -1,0 +1,31 @@
+= reqstool AI Integration
+
+AI-assisted management of https://github.com/reqstool/reqstool-client[reqstool] requirements traceability, with optional https://github.com/openspec-dev/openspec[OpenSpec] integration.
+
+Provides config-driven skills and commands that let AI coding assistants help you manage requirements, verification cases, and traceability filters.
+
+== Features
+
+* Skills for common reqstool operations (status, add requirements, add SVCs, sync filters)
+* Convention files for consistent annotation placement across Java, Python, and TypeScript
+* Optional OpenSpec integration for spec-driven requirements
+
+== Prerequisites
+
+* https://github.com/reqstool/reqstool-client[reqstool CLI] (`pipx install reqstool`)
+* https://github.com/openspec-dev/openspec[OpenSpec] (optional)
+
+== Supported AI tools
+
+[cols="1,1,1"]
+|===
+| Tool | Flag | Status
+
+| https://claude.ai/code[Claude Code]
+| `--tool claude`
+| Supported
+|===
+
+== License
+
+MIT License.
