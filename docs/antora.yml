@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/asciidoctor/asciidoctor-intellij-plugin/main/src/main/resources/jsonSchemas/antoraComponentSchema.json
+
+name: reqstool-ai
+title: Reqstool AI Integration
+version: ~
+
+nav:
+  - modules/ROOT/nav.adoc

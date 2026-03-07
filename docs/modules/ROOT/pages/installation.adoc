@@ -1,0 +1,27 @@
+= Installation
+
+== Basic installation
+
+[source,bash]
+----
+# Clone the repo
+git clone https://github.com/reqstool/reqstool-ai.git
+
+# Install into your project
+./reqstool-ai/install.sh --tool claude /path/to/your-project
+----
+
+== With OpenSpec integration
+
+[source,bash]
+----
+./reqstool-ai/install.sh --tool claude --with-openspec /path/to/your-project
+----
+
+== What the installer does
+
+* Copies skills, commands, and convention files into the tool's config directory (e.g., `.claude/reqstool/`)
+* Appends the reqstool section to the tool's instructions file (e.g., `CLAUDE.md`) if not already present
+* Creates `.reqstool-ai.yaml` in the project root (config template)
+* With `--with-openspec`: copies OpenSpec conventions and merges reqstool rules into `openspec/config.yaml`
+* Re-running the installer updates existing files in place

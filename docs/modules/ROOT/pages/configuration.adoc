@@ -1,0 +1,50 @@
+= Configuration
+
+After installing, edit `.reqstool-ai.yaml` in your project root:
+
+[source,yaml]
+----
+# .reqstool-ai.yaml
+urn: my-project
+revision: "0.1.0"
+system:
+  path: docs/reqstool
+modules:
+  core:
+    path: core/docs/reqstool
+    req_prefix: CORE_
+    svc_prefix: SVC_CORE_
+  app:
+    path: app/docs/reqstool
+    req_prefix: CLI_
+    svc_prefix: SVC_CLI_
+----
+
+== Config reference
+
+[cols="1,2"]
+|===
+| Field | Description
+
+| `urn`
+| Project URN used in reqstool YAML files and filter keys
+
+| `revision`
+| Version string for new requirements and SVCs
+
+| `system.path`
+| Path to the system-level reqstool directory (SSOT)
+
+| `modules.<name>.path`
+| Path to a subproject's reqstool directory
+
+| `modules.<name>.req_prefix`
+| Requirement ID prefix for this module (e.g., `CORE_`)
+
+| `modules.<name>.svc_prefix`
+| SVC ID prefix for this module (e.g., `SVC_CORE_`)
+|===
+
+== How it works
+
+All skills read `.reqstool-ai.yaml` from the project root at runtime. This config file defines the project URN, module paths, and ID prefixes. No template substitution or build step is needed -- the same skill files work across any project with a valid config.
