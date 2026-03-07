@@ -1,4 +1,4 @@
-= Reqstool AI Integration
+= reqstool AI Integration
 
 AI-assisted management of https://github.com/reqstool/reqstool-client[reqstool] requirements traceability, with optional https://github.com/openspec-dev/openspec[OpenSpec] integration.
 
