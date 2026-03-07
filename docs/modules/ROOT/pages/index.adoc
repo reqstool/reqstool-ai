@@ -26,4 +26,3 @@ Provides config-driven skills and commands that let AI coding assistants help yo
 | Supported
 |===
 
-See xref:installation.adoc[Installation] to get started.
