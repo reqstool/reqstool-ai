@@ -76,6 +76,35 @@ Use **dot notation** for sub-requirements and sub-SVCs (aligned with ISO 29148, 
 - Not limited to 26 children (unlike letter suffixes)
 - Parent ID is visually embedded in the child ID
 
+## Prefix Naming Strategies
+
+**Always use domain-specific prefixes** — prefixes should reflect the functional domain:
+- `AUTH_`, `API_`, `CORE_`, `OBSERVABILITY_`, etc.
+
+**Optionally combine with module prefix** when requirements belong to a specific module AND domain:
+- `CORE_AUTH_`, `APP_UI_`, `CLI_SEARCH_`, etc.
+
+Choose the pattern that fits your project:
+
+| Pattern | When to use | Examples |
+|---------|-------------|---------|
+| Domain only | Single-module service, or cross-cutting concerns | `AUTH_0001`, `API_0001`, `OBSERVABILITY_0001` |
+| Module only | Multi-module project where module IS the domain | `CORE_0001`, `CLI_0001` |
+| Module + domain | Multi-module project where a module has multiple domains | `CORE_AUTH_0001`, `APP_UI_0001` |
+
+**Example — multi-module project (atunko):** `CORE_`, `CLI_`, `TUI_` — each module prefix maps to a subproject.
+
+**Example — single-module Spring Boot service:**
+
+| Prefix | Domain |
+|--------|--------|
+| `AUTH_` | Authentication & authorization |
+| `API_` | REST API endpoints |
+| `CORE_` | Core business logic |
+| `OBSERVABILITY_` | Observability (logging, metrics, health) |
+
+**Config for domain-specific prefixes:** set `req_prefix: ""` and `svc_prefix: SVC_` since IDs are managed manually. SVC IDs mirror the requirement prefix: `AUTH_0001` → `SVC_AUTH_0001`.
+
 ## SVC-to-Requirement Mapping
 
 - **Child requirements may have one or more SVCs** — each SVC verifies a specific aspect

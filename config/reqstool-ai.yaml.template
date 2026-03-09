@@ -36,3 +36,11 @@ modules:
   #   path: app/docs/reqstool
   #   req_prefix: CLI_
   #   svc_prefix: SVC_CLI_
+
+  # Example: domain-specific prefixes (multiple prefixes in one module)
+  # When a single module uses multiple domain prefixes (e.g., AUTH_, API_, CORE_, OBSERVABILITY_),
+  # set req_prefix to empty and manage IDs manually in requirements.yml
+  # service:
+  #   path: docs/reqstool
+  #   req_prefix: ""
+  #   svc_prefix: SVC_
