@@ -31,15 +31,59 @@ copilot plugin marketplace add reqstool/reqstool-ai
 copilot plugin install reqstool@reqstool-ai
 ```
 
-### Post-install configuration
+### Configure your project
 
-Copy the config template to your project root and edit it:
+After installing the plugin, run `/reqstool:init` to create `.reqstool-ai.yaml` in your project root:
 
-```bash
-cp <plugin-cache-path>/config/reqstool-ai.yaml.template .reqstool-ai.yaml
+```
+/reqstool:init
 ```
 
-Edit `.reqstool-ai.yaml` with your project's URN, paths, and module prefixes. See the [documentation](https://reqstool.github.io) for the full config reference.
+This walks you through setting up:
+- **URN** — your project identifier used in reqstool YAML files
+- **Revision** — version string for new requirements and SVCs
+- **System path** — where the system-level requirements and SVCs live
+- **Modules** — one or more subproject modules with their paths and ID prefixes
+
+You can re-run `/reqstool:init` at any time to update the config (e.g., to add new modules). It reads the existing `.reqstool-ai.yaml` and uses current values as defaults.
+
+See the [documentation](https://reqstool.github.io) for the full config reference.
+
+## Configuration (`.reqstool-ai.yaml`)
+
+All reqstool skills and commands read `.reqstool-ai.yaml` from the project root. This file defines your project's reqstool structure:
+
+```yaml
+# Project URN — matches the urn in your reqstool YAML files
+urn: my-project
+
+# Revision string for new requirements and SVCs
+revision: "0.1.0"
+
+# System-level reqstool directory (SSOT for requirements and SVCs)
+system:
+  path: docs/reqstool
+
+# Subproject modules — each imports a subset of requirements/SVCs via filters
+modules:
+  core:
+    path: core/docs/reqstool
+    req_prefix: CORE_           # Requirement IDs: CORE_0001, CORE_0002, ...
+    svc_prefix: SVC_CORE_       # SVC IDs: SVC_CORE_0001, SVC_CORE_0002, ...
+  app:
+    path: app/docs/reqstool
+    req_prefix: CLI_
+    svc_prefix: SVC_CLI_
+```
+
+| Field | Description |
+|-------|-------------|
+| `urn` | Project URN used in reqstool YAML files and filter keys |
+| `revision` | Version string stamped on new requirements and SVCs |
+| `system.path` | Path to the system-level reqstool directory (SSOT) |
+| `modules.<name>.path` | Path to a subproject's reqstool directory (contains filter files) |
+| `modules.<name>.req_prefix` | Requirement ID prefix (e.g., `CORE_`). Set to `""` for domain-specific prefixes |
+| `modules.<name>.svc_prefix` | SVC ID prefix (e.g., `SVC_CORE_`) |
 
 ## Skills and commands
 
@@ -47,6 +91,7 @@ Edit `.reqstool-ai.yaml` with your project's URN, paths, and module prefixes. Se
 
 | Command | Description |
 |---------|-------------|
+| `/reqstool:init` | Create or update `.reqstool-ai.yaml` configuration interactively |
 | `/reqstool:add-req` | Add a new requirement and update subproject filters |
 | `/reqstool:add-svc` | Add a new Software Verification Case and update filters |
 | `/reqstool:status` | Show requirements traceability status for one or all modules |
