@@ -162,6 +162,10 @@ reqstool-ai/
 │       ├── .claude-plugin/
 │       │   └── plugin.json
 │       ├── skills/
+│       │   ├── reqstool-init/
+│       │   │   ├── SKILL.md
+│       │   │   └── references/
+│       │   │       └── reqstool-ai.yaml.template
 │       │   ├── reqstool-add-req/
 │       │   ├── reqstool-add-svc/
 │       │   ├── reqstool-status/
@@ -174,8 +178,6 @@ reqstool-ai/
 │       │       └── references/       # Bundled OpenSpec docs
 │       └── commands/
 │           └── reqstool/
-├── config/
-│   └── reqstool-ai.yaml.template
 ├── docs/                             # Antora documentation
 ├── CLAUDE.md
 ├── README.md
