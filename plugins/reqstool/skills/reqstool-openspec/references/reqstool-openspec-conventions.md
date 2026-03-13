@@ -28,8 +28,7 @@ The JSON output contains:
 - `svcs` — keyed by `urn:SVC_ID` (e.g., `myproject:SVC_CORE_0001`), includes title, description (GIVEN/WHEN/THEN), requirement_ids
 - `svcs_from_req` — maps requirement IDs to their SVC IDs
 
-**Do NOT read YAML files directly** — use the CLI. The subproject YAML files only contain
-filters and imports, not the actual requirement/SVC content.
+**Do NOT read YAML files directly** — use the CLI, as not all information might be available locally but in a repository for Maven, PyPi etc.
 
 ## spec.md Format
 
