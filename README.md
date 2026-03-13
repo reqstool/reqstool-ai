@@ -106,7 +106,29 @@ modules:
 
 Skills are applied automatically based on context — no manual invocation needed.
 
-## Plugin details
+## Command details
+
+### `/reqstool:init`
+
+Interactively create or update `.reqstool-ai.yaml` in your project root. Walks you through URN, revision, system path, and module definitions (name, path, ID prefixes). When re-run on a project that already has a config, it reads existing values as defaults so you can add modules or change settings without starting over.
+
+### `/reqstool:add-req`
+
+Add a new requirement to the system-level `requirements.yml` (the single source of truth) and update the relevant subproject filter to include it. Automatically determines the next ID based on the module's `req_prefix`, supports parent-child decomposition with dot-notation IDs (e.g., `CLI_0004.1`), and reminds you to annotate the implementation with `@Requirements`.
+
+### `/reqstool:add-svc`
+
+Add a new Software Verification Case (SVC) to the system-level `software_verification_cases.yml` and update the subproject filter. Given a requirement ID, it drafts a GIVEN/WHEN/THEN scenario, mirrors the requirement's ID structure for the SVC ID, and reminds you to annotate the test with `@SVCs`.
+
+### `/reqstool:status`
+
+Run `reqstool status local` for one or all modules and summarize the results — total requirements, how many are implemented vs missing, SVC coverage, and any gaps. Accepts a module name (e.g., `/reqstool:status core`) or `all` (default).
+
+### `/reqstool:sync-filters`
+
+Synchronize subproject filter files to match the current system-level requirements and SVCs. After adding or removing entries at the system level, filters in subproject `requirements.yml` and `software_verification_cases.yml` may be out of date. This command computes the diff and updates the `includes` lists, then verifies with `reqstool status`.
+
+## Skill details
 
 ### reqstool-conventions
 
