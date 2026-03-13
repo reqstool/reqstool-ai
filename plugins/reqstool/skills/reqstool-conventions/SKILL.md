@@ -11,6 +11,7 @@ metadata:
 When working with reqstool requirements, SVCs, annotations, or filters, read the relevant
 convention files from this skill's references/ directory before making changes.
 
+- `references/reqstool-overview.md` — what reqstool is, architecture (system/microservice/external), YAML files, imports, filters, implementations, CLI basics
 - `references/reqstool-conventions.md` — overview of config fields, skill conventions, and pointers to the other docs
 - `references/reqstool-annotation-conventions.md` — where and how to place `@Requirements` and `@SVCs` annotations (Java, Python, TypeScript)
 - `references/reqstool-decomposition-conventions.md` — parent-child requirement hierarchies, dot-notation IDs, lifecycle states, prefix strategies

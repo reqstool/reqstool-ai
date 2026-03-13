@@ -9,8 +9,11 @@ reqstool-ai is distributed as a plugin that works with both Claude Code and GitH
 # Add marketplace (one-time)
 /plugin marketplace add reqstool/reqstool-ai
 
-# Install the plugin
+# Install core plugin
 /plugin install reqstool@reqstool-ai --scope project
+
+# Optional: OpenSpec integration
+/plugin install reqstool-openspec@reqstool-ai --scope project
 ----
 
 == GitHub Copilot CLI
@@ -20,8 +23,11 @@ reqstool-ai is distributed as a plugin that works with both Claude Code and GitH
 # Add marketplace (one-time)
 copilot plugin marketplace add reqstool/reqstool-ai
 
-# Install the plugin
+# Install core plugin
 copilot plugin install reqstool@reqstool-ai
+
+# Optional: OpenSpec integration
+copilot plugin install reqstool-openspec@reqstool-ai
 ----
 
 == Post-install configuration
@@ -53,15 +59,17 @@ Edit the values to match your project's structure. See xref:configuration.adoc[C
 
 == Testing locally
 
-To test the plugin without installing from the marketplace:
+To test the plugins without installing from the marketplace:
 
 [source,bash]
 ----
 # Claude Code
 claude --plugin-dir ./plugins/reqstool
+claude --plugin-dir ./plugins/reqstool-openspec
 
 # Copilot CLI
 copilot plugin install --path ./plugins/reqstool
+copilot plugin install --path ./plugins/reqstool-openspec
 ----
 
 == Updating
@@ -70,7 +78,9 @@ copilot plugin install --path ./plugins/reqstool
 ----
 # Claude Code
 /plugin update reqstool@reqstool-ai
+/plugin update reqstool-openspec@reqstool-ai
 
 # Copilot CLI
 copilot plugin update reqstool@reqstool-ai
+copilot plugin update reqstool-openspec@reqstool-ai
 ----

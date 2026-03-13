@@ -17,8 +17,11 @@ Provides config-driven skills and commands that let AI coding assistants help yo
 # Add marketplace (one-time)
 /plugin marketplace add reqstool/reqstool-ai
 
-# Install the plugin
+# Install core plugin
 /plugin install reqstool@reqstool-ai --scope project
+
+# Optional: OpenSpec integration
+/plugin install reqstool-openspec@reqstool-ai --scope project
 ```
 
 ### GitHub Copilot CLI
@@ -27,8 +30,11 @@ Provides config-driven skills and commands that let AI coding assistants help yo
 # Add marketplace (one-time)
 copilot plugin marketplace add reqstool/reqstool-ai
 
-# Install the plugin
+# Install core plugin
 copilot plugin install reqstool@reqstool-ai
+
+# Optional: OpenSpec integration
+copilot plugin install reqstool-openspec@reqstool-ai
 ```
 
 ### Configure your project
@@ -92,15 +98,20 @@ modules:
 | `/reqstool:init` | Create or update `.reqstool-ai.yaml` configuration interactively |
 | `/reqstool:add-req` | Add a new requirement and update subproject filters |
 | `/reqstool:add-svc` | Add a new Software Verification Case and update filters |
-| `/reqstool:status` | Show requirements traceability status for one or all modules |
+| `/reqstool:status` | Show requirements traceability status for system or a module |
 ### Skills (auto-applied)
 
 | When you're... | Skill |
 |---|---|
 | Working with reqstool YAML files or annotations | `reqstool-conventions` |
-| Working with OpenSpec spec.md files | `reqstool-openspec` |
 
 Skills are applied automatically based on context — no manual invocation needed.
+
+#### reqstool-openspec plugin (separate install)
+
+| When you're... | Skill |
+|---|---|
+| Working with OpenSpec spec.md files | `reqstool-openspec` |
 
 ## Command details
 
@@ -118,7 +129,7 @@ Add a new Software Verification Case (SVC) to the system-level `software_verific
 
 ### `/reqstool:status`
 
-Run `reqstool status local` for one or all modules and summarize the results — total requirements, how many are implemented vs missing, SVC coverage, and any gaps. Accepts a module name (e.g., `/reqstool:status core`) or `all` (default).
+Run `reqstool status local` for the system or a specific module. Accepts an optional module name (e.g., `/reqstool:status core`); defaults to the system-level path from `.reqstool-ai.yaml`. Reqstool traverses imports and implementation config automatically.
 
 ## Skill details
 
@@ -130,7 +141,9 @@ Bundled convention docs that are auto-applied when working with reqstool files:
 - **reqstool-annotation-conventions.md** — `@Requirements` and `@SVCs` placement rules (Java, Python, TypeScript)
 - **reqstool-decomposition-conventions.md** — parent-child hierarchies, dot-notation IDs, lifecycle states
 
-### reqstool-openspec
+### reqstool-openspec (separate plugin)
+
+Install: `/plugin install reqstool-openspec@reqstool-ai --scope project`
 
 OpenSpec integration conventions, auto-applied when working with spec.md files:
 
@@ -152,25 +165,29 @@ reqstool-ai/
 │   └── plugin/
 │       └── marketplace.json          # Copilot CLI marketplace manifest
 ├── plugins/
-│   └── reqstool/                     # Plugin (shared by both tools)
+│   ├── reqstool/                     # Core plugin
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   ├── skills/
+│   │   │   ├── reqstool-init/
+│   │   │   │   ├── SKILL.md
+│   │   │   │   └── references/
+│   │   │   │       └── reqstool-ai.yaml.template
+│   │   │   ├── reqstool-add-req/
+│   │   │   ├── reqstool-add-svc/
+│   │   │   ├── reqstool-status/
+│   │   │   └── reqstool-conventions/
+│   │   │       ├── SKILL.md
+│   │   │       └── references/       # Bundled convention docs
+│   │   └── commands/
+│   │       └── reqstool/
+│   └── reqstool-openspec/            # OpenSpec integration plugin
 │       ├── .claude-plugin/
 │       │   └── plugin.json
-│       ├── skills/
-│       │   ├── reqstool-init/
-│       │   │   ├── SKILL.md
-│       │   │   └── references/
-│       │   │       └── reqstool-ai.yaml.template
-│       │   ├── reqstool-add-req/
-│       │   ├── reqstool-add-svc/
-│       │   ├── reqstool-status/
-│       │   ├── reqstool-conventions/
-│       │   │   ├── SKILL.md
-│       │   │   └── references/       # Bundled convention docs
-│       │   └── reqstool-openspec/
-│       │       ├── SKILL.md
-│       │       └── references/       # Bundled OpenSpec docs
-│       └── commands/
-│           └── reqstool/
+│       └── skills/
+│           └── reqstool-openspec/
+│               ├── SKILL.md
+│               └── references/       # Bundled OpenSpec docs
 ├── docs/                             # Antora documentation
 ├── CLAUDE.md
 ├── README.md
@@ -183,9 +200,11 @@ reqstool-ai/
 ```bash
 # Claude Code
 claude --plugin-dir ./plugins/reqstool
+claude --plugin-dir ./plugins/reqstool-openspec
 
 # Copilot CLI
 copilot plugin install --path ./plugins/reqstool
+copilot plugin install --path ./plugins/reqstool-openspec
 ```
 
 ## Updating
@@ -193,9 +212,11 @@ copilot plugin install --path ./plugins/reqstool
 ```bash
 # Claude Code
 /plugin update reqstool@reqstool-ai
+/plugin update reqstool-openspec@reqstool-ai
 
 # Copilot CLI
 copilot plugin update reqstool@reqstool-ai
+copilot plugin update reqstool-openspec@reqstool-ai
 ```
 
 ## Contributing
@@ -204,10 +225,10 @@ See the organization-wide [CONTRIBUTING.md](https://github.com/reqstool/.github/
 
 ### Adding or updating plugin content
 
-1. Make your changes in `plugins/reqstool/skills/` or `plugins/reqstool/commands/`.
-2. Bump the version in `plugins/reqstool/.claude-plugin/plugin.json`.
+1. Make your changes in `plugins/reqstool/` or `plugins/reqstool-openspec/`.
+2. Bump the version in the changed plugin's `.claude-plugin/plugin.json`.
 3. Bump `metadata.version` in both `.claude-plugin/marketplace.json` and `.github/plugin/marketplace.json`.
-4. Test locally with `claude --plugin-dir ./plugins/reqstool`.
+4. Test locally with `claude --plugin-dir ./plugins/<plugin-name>`.
 5. Submit a PR.
 
 ## Documentation

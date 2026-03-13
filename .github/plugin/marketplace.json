@@ -6,13 +6,18 @@
     "url": "https://github.com/reqstool"
   },
   "metadata": {
-    "version": "1.0.0"
+    "version": "0.1.0"
   },
   "plugins": [
     {
       "name": "reqstool",
       "source": "./plugins/reqstool",
       "description": "reqstool skills and commands — add requirements, add SVCs, check status."
+    },
+    {
+      "name": "reqstool-openspec",
+      "source": "./plugins/reqstool-openspec",
+      "description": "OpenSpec integration — conventions for referencing reqstool IDs in spec.md files."
     }
   ]
 }

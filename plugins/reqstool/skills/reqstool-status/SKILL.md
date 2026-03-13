@@ -1,17 +1,17 @@
 ---
 name: reqstool-status
-description: Show reqstool traceability status for system, subproject, or all modules. Use when the user wants to check requirement coverage, missing implementations, or test status.
+description: Run reqstool traceability status on the local filesystem. Use when the user wants to check requirement coverage, missing implementations, or test status.
 license: Apache-2.0
 metadata:
   author: reqstool-ai
   version: "1.0"
 ---
 
-Show reqstool requirements traceability status.
+Run `reqstool status local` for a reqstool directory in this project.
 
 ---
 
-**Input**: Optional module name — `system`, a subproject name, or `all`. Defaults to `all`.
+**Input**: Optional module name from `.reqstool-ai.yaml`. Defaults to system-level.
 
 **Configuration**
 
@@ -23,35 +23,23 @@ Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
 
    Read `.reqstool-ai.yaml`. Build a mapping of module names to their paths.
 
-2. **Determine which module(s) to report**
+2. **Determine which path to use**
 
-   Parse the argument after the command. Accept:
-   - `system` / `sys` — system-level only
-   - A module name from config (e.g., `core`, `app`) — that module only
-   - `all` or no argument — system + all modules
+   - If the user specified a module name (e.g., `core`), use that module's path from `.reqstool-ai.yaml`.
+   - If no argument was given, default to the system-level path (`system.path`).
+   - If the user is working inside a module directory (e.g., a Gradle subproject),
+     ask whether they want to run status for that module or for the system level.
 
 3. **Run reqstool status**
 
-   For each selected module, run:
    ```bash
    reqstool status local -p <path>
    ```
 
-   If running `all`, run them sequentially with a header before each:
-   ```
-   ## System (<system.path>)
-   ## <module-name> (<module.path>)
-   ```
+   Show the output directly — reqstool traverses imports and implementation
+   configuration automatically, so no further summarization is needed.
 
-4. **Summarize results**
-
-   After running, provide a brief summary:
-   - Total requirements per module
-   - How many are implemented vs missing
-   - How many SVCs have tests vs missing
-   - Any manual verification results missing
-
-5. **If reqstool is not installed**
+4. **If reqstool is not installed**
 
    If the command fails with "not found", tell the user:
    ```
@@ -61,3 +49,4 @@ Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
 **Guardrails**
 - Always run from the project root directory
 - Do not modify any files — this is a read-only status command
+- Do not summarize or reformat reqstool output — show it as-is

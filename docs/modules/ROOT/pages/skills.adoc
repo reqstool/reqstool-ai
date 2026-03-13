@@ -31,6 +31,16 @@ Skills are applied automatically based on context — no manual invocation neede
 | `reqstool-conventions`
 | Working with reqstool YAML files, `@Requirements`/`@SVCs` annotations, or `.reqstool-ai.yaml`
 
+|===
+
+=== reqstool-openspec plugin (separate install)
+
+Install: `/plugin install reqstool-openspec@reqstool-ai --scope project`
+
+[cols="1,2"]
+|===
+| Skill | Auto-applied when...
+
 | `reqstool-openspec`
 | Working with OpenSpec spec.md files that reference reqstool IDs
 |===
@@ -53,7 +63,7 @@ Bundled convention docs that guide the AI assistant:
 | Parent-child hierarchies, dot notation, lifecycle states
 |===
 
-=== reqstool-openspec
+=== reqstool-openspec (separate plugin)
 
 OpenSpec integration conventions:
 

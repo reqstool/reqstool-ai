@@ -17,6 +17,8 @@ Add a new requirement to the system and update subproject filters.
 
 Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
 
+For reqstool fundamentals (imports, filters, implementations), see `reqstool-overview.md` in the `reqstool-conventions` skill references.
+
 **Steps**
 
 1. **Read config**

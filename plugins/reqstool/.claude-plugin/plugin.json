@@ -1,7 +1,7 @@
 {
   "name": "reqstool",
   "description": "AI-assisted reqstool requirements traceability — skills and commands for managing requirements, SVCs, and filters.",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "author": {
     "name": "reqstool",
     "url": "https://github.com/reqstool"
