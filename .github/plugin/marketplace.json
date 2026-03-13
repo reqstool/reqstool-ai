@@ -1,0 +1,18 @@
+{
+  "name": "reqstool-ai",
+  "description": "AI-assisted reqstool requirements traceability — skills and commands for managing requirements, SVCs, and filters.",
+  "owner": {
+    "name": "reqstool",
+    "url": "https://github.com/reqstool"
+  },
+  "metadata": {
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "reqstool",
+      "source": "./plugins/reqstool",
+      "description": "reqstool skills and commands — add requirements, add SVCs, check status, sync filters."
+    }
+  ]
+}

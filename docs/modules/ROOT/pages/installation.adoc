@@ -1,27 +1,76 @@
 = Installation
 
-== Basic installation
+reqstool-ai is distributed as a plugin that works with both Claude Code and GitHub Copilot CLI.
+
+== Claude Code
 
 [source,bash]
 ----
-# Clone the repo
-git clone https://github.com/reqstool/reqstool-ai.git
+# Add marketplace (one-time)
+/plugin marketplace add reqstool/reqstool-ai
 
-# Install into your project
-./reqstool-ai/install.sh --tool claude /path/to/your-project
+# Install the plugin
+/plugin install reqstool@reqstool-ai --scope project
 ----
 
-== With OpenSpec integration
+== GitHub Copilot CLI
 
 [source,bash]
 ----
-./reqstool-ai/install.sh --tool claude --with-openspec /path/to/your-project
+# Add marketplace (one-time)
+copilot plugin marketplace add reqstool/reqstool-ai
+
+# Install the plugin
+copilot plugin install reqstool@reqstool-ai
 ----
 
-== What the installer does
+== Post-install configuration
 
-* Copies skills, commands, and convention files into the tool's config directory (e.g., `.claude/reqstool/`)
-* Appends the reqstool section to the tool's instructions file (e.g., `CLAUDE.md`) if not already present
-* Creates `.reqstool-ai.yaml` in the project root (config template)
-* With `--with-openspec`: copies OpenSpec conventions and merges reqstool rules into `openspec/config.yaml`
-* Re-running the installer updates existing files in place
+After installing the plugin, create a `.reqstool-ai.yaml` config file in your project root.
+Use the template from the repo as a starting point:
+
+[source,yaml]
+----
+# Project URN — matches the urn in your reqstool YAML files
+urn: my-project
+
+# Revision string for new requirements and SVCs
+revision: "0.1.0"
+
+# System-level reqstool directory (contains the SSOT requirements and SVCs)
+system:
+  path: docs/reqstool
+
+# Subproject modules
+modules:
+  core:
+    path: core/docs/reqstool
+    req_prefix: CORE_
+    svc_prefix: SVC_CORE_
+----
+
+Edit the values to match your project's structure. See xref:configuration.adoc[Configuration] for the full reference.
+
+== Testing locally
+
+To test the plugin without installing from the marketplace:
+
+[source,bash]
+----
+# Claude Code
+claude --plugin-dir ./plugins/reqstool
+
+# Copilot CLI
+copilot plugin install --path ./plugins/reqstool
+----
+
+== Updating
+
+[source,bash]
+----
+# Claude Code
+/plugin update reqstool@reqstool-ai
+
+# Copilot CLI
+copilot plugin update reqstool@reqstool-ai
+----

@@ -54,7 +54,7 @@ Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
 
    **For parent requirements** (when children exist):
    - Use the base ID: `SVC_CLI_0004` (mirrors the parent requirement)
-   - See `.claude/reqstool/reqstool-decomposition-conventions.md` for parent SVC conventions
+   - See `reqstool-decomposition-conventions.md` (in the `reqstool-conventions` skill references) for parent SVC conventions
 
 5. **Add the SVC to system-level file**
 

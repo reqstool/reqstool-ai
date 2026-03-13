@@ -27,4 +27,4 @@ All skills read `.reqstool-ai.yaml` from the project root. It defines:
 ## OpenSpec Integration
 
 When creating or modifying OpenSpec spec.md files,
-follow the conventions in `reqstool-openspec-conventions.md`.
+follow the conventions in the `reqstool-openspec` skill (auto-applied when OpenSpec files are detected).

@@ -6,8 +6,8 @@ For DCO sign-off, commit conventions, and code review process, see the organizat
 
 ## Prerequisites
 
-- Bash/Zsh shell
 - [reqstool CLI](https://github.com/reqstool/reqstool-client)
+- Claude Code or GitHub Copilot CLI (for testing plugins)
 
 ## Setup
 
@@ -18,8 +18,20 @@ cd reqstool-ai
 
 ## Testing
 
-Test the installer against a sample project:
+Test the plugin locally:
 
 ```bash
-./install.sh --tool claude /path/to/test-project
+# Claude Code
+claude --plugin-dir ./plugins/reqstool
+
+# Copilot CLI
+copilot plugin install --path ./plugins/reqstool
 ```
+
+## Adding or updating plugin content
+
+1. Make your changes in `plugins/reqstool/skills/` or `plugins/reqstool/commands/`.
+2. Bump the version in `plugins/reqstool/.claude-plugin/plugin.json`.
+3. Bump `metadata.version` in both `.claude-plugin/marketplace.json` and `.github/plugin/marketplace.json`.
+4. Test locally.
+5. Submit a PR.
