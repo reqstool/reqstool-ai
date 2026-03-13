@@ -47,8 +47,6 @@ This walks you through setting up:
 
 You can re-run `/reqstool:init` at any time to update the config (e.g., to add new modules). It reads the existing `.reqstool-ai.yaml` and uses current values as defaults.
 
-See the [documentation](https://reqstool.github.io) for the full config reference.
-
 ## Configuration (`.reqstool-ai.yaml`)
 
 All reqstool skills and commands read `.reqstool-ai.yaml` from the project root. This file defines your project's reqstool structure:
