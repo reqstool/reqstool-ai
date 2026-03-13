@@ -1,5 +1,19 @@
 # reqstool Annotation Conventions
 
+## Terminology
+
+Throughout reqstool documentation, **"annotations"** is used as the umbrella term for
+language-specific metadata that links code to requirements:
+
+| Language   | Mechanism        | Syntax |
+|------------|------------------|--------|
+| Java       | Annotations      | `@Requirements({"ID"})` / `@SVCs({"ID"})` |
+| Python     | Decorators       | `@requirements(["ID"])` / `@svcs(["ID"])` |
+| TypeScript | JSDoc tags       | `/** @requirements ID */` / `/** @svcs ID */` |
+
+When you see "add annotations" in conventions or task lists, use the appropriate
+mechanism for your language.
+
 ## Principle: As Close to the Implementation as Possible
 
 Place `@Requirements` and `@SVCs` annotations **on the method or function that directly
