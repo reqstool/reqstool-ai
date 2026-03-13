@@ -18,20 +18,22 @@ cd reqstool-ai
 
 ## Testing
 
-Test the plugin locally:
+Test the plugins locally:
 
 ```bash
 # Claude Code
 claude --plugin-dir ./plugins/reqstool
+claude --plugin-dir ./plugins/reqstool-openspec
 
 # Copilot CLI
 copilot plugin install --path ./plugins/reqstool
+copilot plugin install --path ./plugins/reqstool-openspec
 ```
 
 ## Adding or updating plugin content
 
-1. Make your changes in `plugins/reqstool/skills/` or `plugins/reqstool/commands/`.
-2. Bump the version in `plugins/reqstool/.claude-plugin/plugin.json`.
+1. Make your changes in `plugins/reqstool/` or `plugins/reqstool-openspec/`.
+2. Bump the version in the changed plugin's `.claude-plugin/plugin.json`.
 3. Bump `metadata.version` in both `.claude-plugin/marketplace.json` and `.github/plugin/marketplace.json`.
 4. Test locally.
 5. Submit a PR.
