@@ -93,8 +93,6 @@ modules:
 | `/reqstool:add-req` | Add a new requirement and update subproject filters |
 | `/reqstool:add-svc` | Add a new Software Verification Case and update filters |
 | `/reqstool:status` | Show requirements traceability status for one or all modules |
-| `/reqstool:sync-filters` | Sync subproject filters to match system-level IDs |
-
 ### Skills (auto-applied)
 
 | When you're... | Skill |
@@ -121,10 +119,6 @@ Add a new Software Verification Case (SVC) to the system-level `software_verific
 ### `/reqstool:status`
 
 Run `reqstool status local` for one or all modules and summarize the results — total requirements, how many are implemented vs missing, SVC coverage, and any gaps. Accepts a module name (e.g., `/reqstool:status core`) or `all` (default).
-
-### `/reqstool:sync-filters`
-
-Synchronize subproject filter files to match the current system-level requirements and SVCs. After adding or removing entries at the system level, filters in subproject `requirements.yml` and `software_verification_cases.yml` may be out of date. This command computes the diff and updates the `includes` lists, then verifies with `reqstool status`.
 
 ## Skill details
 
@@ -169,7 +163,6 @@ reqstool-ai/
 │       │   ├── reqstool-add-req/
 │       │   ├── reqstool-add-svc/
 │       │   ├── reqstool-status/
-│       │   ├── reqstool-sync-filters/
 │       │   ├── reqstool-conventions/
 │       │   │   ├── SKILL.md
 │       │   │   └── references/       # Bundled convention docs

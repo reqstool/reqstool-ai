@@ -18,8 +18,6 @@
 | `/reqstool:add-svc`
 | Add a new Software Verification Case and update filters
 
-| `/reqstool:sync-filters`
-| Sync subproject filters to match system-level IDs
 |===
 
 == Skills (auto-applied)

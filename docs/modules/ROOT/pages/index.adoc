@@ -6,7 +6,7 @@ Distributed as a plugin that works with both Claude Code and GitHub Copilot CLI 
 
 == Features
 
-* Commands for common reqstool operations (status, add requirements, add SVCs, sync filters)
+* Commands for common reqstool operations (status, add requirements, add SVCs)
 * Interactive `/reqstool:init` to scaffold project configuration
 * Convention skills auto-applied when working with reqstool files (annotation placement, decomposition patterns)
 * Optional OpenSpec integration for spec-driven requirements

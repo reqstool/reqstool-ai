@@ -12,7 +12,7 @@
     {
       "name": "reqstool",
       "source": "./plugins/reqstool",
-      "description": "reqstool skills and commands — add requirements, add SVCs, check status, sync filters."
+      "description": "reqstool skills and commands — add requirements, add SVCs, check status."
     }
   ]
 }
