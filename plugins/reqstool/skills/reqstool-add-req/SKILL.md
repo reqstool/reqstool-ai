@@ -17,6 +17,8 @@ Add a new requirement to the system and update subproject filters.
 
 Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
 
+For reqstool fundamentals (imports, filters, implementations), see `reqstool-overview.md` in the `reqstool-conventions` skill references.
+
 **Steps**
 
 1. **Read config**
@@ -47,7 +49,7 @@ Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
    **For child requirements** (when a parent ID is provided): Use dot notation.
    Find the highest existing child number for that parent and increment by 1.
    Format: `<PARENT_ID>.N` (e.g., `CLI_0004.1`, `CLI_0004.2`).
-   See `.claude/reqstool/reqstool-decomposition-conventions.md` for when and how to decompose.
+   See `reqstool-decomposition-conventions.md` (in the `reqstool-conventions` skill references) for when and how to decompose.
 
 4. **Add the requirement to system-level file**
 

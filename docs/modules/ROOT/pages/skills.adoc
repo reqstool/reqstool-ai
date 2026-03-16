@@ -1,34 +1,60 @@
-= Skills
+= Skills and Commands
 
-== Available skills
+== Commands (user-invoked)
 
 [cols="1,2"]
 |===
-| Skill / Command | Description
+| Command | Description
 
-| `reqstool:status`
+| `/reqstool:init`
+| Create or update `.reqstool-ai.yaml` configuration interactively
+
+| `/reqstool:status`
 | Show requirements traceability status for one or all modules
 
-| `reqstool:add-req`
+| `/reqstool:add-req`
 | Add a new requirement and update subproject filters
 
-| `reqstool:add-svc`
+| `/reqstool:add-svc`
 | Add a new Software Verification Case and update filters
 
-| `reqstool:sync-filters`
-| Sync subproject filters to match system-level IDs
 |===
 
-== Convention files
+== Skills (auto-applied)
 
-Installed alongside skills so the AI assistant follows project-wide rules:
+Skills are applied automatically based on context — no manual invocation needed.
 
 [cols="1,2"]
 |===
-| File | Description
+| Skill | Auto-applied when...
+
+| `reqstool-conventions`
+| Working with reqstool YAML files, `@Requirements`/`@SVCs` annotations, or `.reqstool-ai.yaml`
+
+|===
+
+=== reqstool-openspec plugin (separate install)
+
+Install: `/plugin install reqstool-openspec@reqstool-ai --scope project`
+
+[cols="1,2"]
+|===
+| Skill | Auto-applied when...
+
+| `reqstool-openspec`
+| Working with OpenSpec spec.md files that reference reqstool IDs
+|===
+
+=== reqstool-conventions
+
+Bundled convention docs that guide the AI assistant:
+
+[cols="1,2"]
+|===
+| Reference file | Description
 
 | `reqstool-conventions.md`
-| Entry point -- config reference, links to other convention docs
+| Entry point — config reference, links to other convention docs
 
 | `reqstool-annotation-conventions.md`
 | `@Requirements`/`@SVCs` placement for Java, Python, and TypeScript
@@ -37,18 +63,17 @@ Installed alongside skills so the AI assistant follows project-wide rules:
 | Parent-child hierarchies, dot notation, lifecycle states
 |===
 
-== OpenSpec integration (optional)
+=== reqstool-openspec (separate plugin)
+
+OpenSpec integration conventions:
 
 [cols="1,2"]
 |===
-| File | Description
+| Reference file | Description
 
 | `reqstool-openspec-conventions.md`
-| Guide for writing spec.md files that reference reqstool
+| Guide for writing spec.md files that reference reqstool IDs
 
 | `config-rules.yaml`
 | Rules snippet to merge into `openspec/config.yaml`
-
-| `CLAUDE-snippet.md`
-| CLAUDE.md paragraph for OpenSpec + reqstool integration
 |===

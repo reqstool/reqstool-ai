@@ -1,0 +1,11 @@
+{
+  "name": "reqstool-openspec",
+  "description": "OpenSpec integration for reqstool — conventions for referencing reqstool requirements and SVCs in OpenSpec spec.md files.",
+  "version": "0.1.0",
+  "author": {
+    "name": "reqstool",
+    "url": "https://github.com/reqstool"
+  },
+  "license": "Apache-2.0",
+  "keywords": ["reqstool", "openspec", "requirements", "traceability", "specs"]
+}

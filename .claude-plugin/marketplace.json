@@ -1,0 +1,24 @@
+{
+  "name": "reqstool-ai",
+  "description": "AI-assisted reqstool requirements traceability — skills and commands for managing requirements, SVCs, and filters.",
+  "owner": {
+    "name": "reqstool",
+    "url": "https://github.com/reqstool"
+  },
+  "metadata": {
+    "version": "0.1.0",
+    "description": "AI-assisted reqstool requirements traceability — skills and commands for managing requirements, SVCs, and filters, with optional OpenSpec integration."
+  },
+  "plugins": [
+    {
+      "name": "reqstool",
+      "source": "./plugins/reqstool",
+      "description": "reqstool skills and commands — add requirements, add SVCs, check status."
+    },
+    {
+      "name": "reqstool-openspec",
+      "source": "./plugins/reqstool-openspec",
+      "description": "OpenSpec integration — conventions for referencing reqstool IDs in spec.md files."
+    }
+  ]
+}

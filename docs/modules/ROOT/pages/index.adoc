@@ -2,30 +2,33 @@
 
 AI-assisted management of https://github.com/reqstool/reqstool-client[reqstool] requirements traceability, with optional https://github.com/openspec-dev/openspec[OpenSpec] integration.
 
-Provides config-driven skills and commands that let AI coding assistants help you manage requirements, verification cases, and traceability filters.
+Distributed as a plugin that works with both Claude Code and GitHub Copilot CLI — same plugin, same format.
 
 == Features
 
-* Skills for common reqstool operations (status, add requirements, add SVCs, sync filters)
-* Convention files for consistent annotation placement across Java, Python, and TypeScript
-* Optional OpenSpec integration for spec-driven requirements
+* Commands for common reqstool operations (status, add requirements, add SVCs)
+* Interactive `/reqstool:init` to scaffold project configuration
+* Convention skills auto-applied when working with reqstool files (annotation placement, decomposition patterns)
+* Optional OpenSpec integration via separate `reqstool-openspec` plugin
+
+== Supported AI tools
+
+[cols="1,1"]
+|===
+| Tool | Status
+
+| https://claude.ai/code[Claude Code]
+| Supported
+
+| https://docs.github.com/en/copilot[GitHub Copilot CLI]
+| Supported
+|===
 
 == Prerequisites
 
 * https://github.com/reqstool/reqstool-client[reqstool CLI] (`pipx install reqstool`)
 * https://github.com/openspec-dev/openspec[OpenSpec] (optional)
 
-== Supported AI tools
-
-[cols="1,1,1"]
-|===
-| Tool | Flag | Status
-
-| https://claude.ai/code[Claude Code]
-| `--tool claude`
-| Supported
-|===
-
 == License
 
-MIT License.
+Apache 2.0.

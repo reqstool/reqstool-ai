@@ -28,8 +28,7 @@ The JSON output contains:
 - `svcs` — keyed by `urn:SVC_ID` (e.g., `myproject:SVC_CORE_0001`), includes title, description (GIVEN/WHEN/THEN), requirement_ids
 - `svcs_from_req` — maps requirement IDs to their SVC IDs
 
-**Do NOT read YAML files directly** — use the CLI. The subproject YAML files only contain
-filters and imports, not the actual requirement/SVC content.
+**Do NOT read YAML files directly** — use the CLI, as not all information might be available locally but in a repository for Maven, PyPi etc.
 
 ## spec.md Format
 
@@ -123,36 +122,37 @@ afterthought.
 Given this spec.md:
 
 ```markdown
-### Requirement: EVENT_0001
-The system SHALL implement EVENT_0001.
+### Requirement: CORE_0001
+The system SHALL implement CORE_0001.
 
-#### Scenario: SVC_EVENT_0001
-The system SHALL pass SVC_EVENT_0001.
+#### Scenario: SVC_CORE_0001
+The system SHALL pass SVC_CORE_0001.
 ```
 
-The generated tasks should include:
+The generated tasks should include annotation tasks alongside the implementation and test
+tasks they belong to (using the appropriate mechanism for the project's language — see
+`reqstool-annotation-conventions.md` for the terminology table):
 
 ```markdown
-## 4. BillService — Core Logic
+## 4. Core Logic
 
-- [ ] 4.1 Create `BillService` with `handleInstallmentDue(InstallmentDueEvent)` method
-- [ ] 4.2 Add `@Requirements({"EVENT_0001"})` to `handleInstallmentDue`
+- [ ] 4.1 Implement the method/function for CORE_0001
+- [ ] 4.2 Add `@Requirements({"CORE_0001"})` annotation to the implementing method/function
 - [ ] ...
 
-## 7. Unit Tests
+## 7. Tests
 
-- [ ] 7.1 `BillServiceTest`: test new bill creation
-- [ ] 7.2 Add `@SVCs({"SVC_EVENT_0001"})` to the test method from 7.1
+- [ ] 7.1 Write test verifying CORE_0001 behavior
+- [ ] 7.2 Add `@SVCs({"SVC_CORE_0001"})` annotation to the test method/function from 7.1
 - [ ] ...
 ```
 
 ### Why
 
 Without explicit annotation tasks, the spec.md references reqstool IDs but the generated code
-may not include the corresponding `@Requirements` / `@SVCs` annotations. This breaks the
+may not include the corresponding `@Requirements` / `@SVCs` annotations (or decorators/tags —
+see `reqstool-annotation-conventions.md` for language-specific terminology). This breaks the
 traceability chain: reqstool can only verify coverage when annotations are present in the code.
-
-See `reqstool-annotation-conventions.md` for annotation placement rules.
 
 ## Rules
 

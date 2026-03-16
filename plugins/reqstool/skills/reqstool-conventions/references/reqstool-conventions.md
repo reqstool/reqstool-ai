@@ -1,5 +1,7 @@
 # reqstool Conventions
 
+For an overview of reqstool concepts (architecture, imports, filters, implementations), see `reqstool-overview.md`.
+
 ## Source Code Annotations
 
 When writing or modifying code with reqstool annotations (`@Requirements`, `@SVCs`),
@@ -26,5 +28,7 @@ All skills read `.reqstool-ai.yaml` from the project root. It defines:
 
 ## OpenSpec Integration
 
-When creating or modifying OpenSpec spec.md files,
-follow the conventions in `reqstool-openspec-conventions.md`.
+For OpenSpec integration, install the `reqstool-openspec` plugin from this marketplace:
+`/plugin install reqstool-openspec@reqstool-ai --scope project`
+
+It provides conventions for referencing reqstool IDs in OpenSpec spec.md files.
