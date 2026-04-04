@@ -1,5 +1,5 @@
 ---
-name: reqstool-status
+name: reqstool:status
 description: Run reqstool traceability status on the local filesystem. Use when the user wants to check requirement coverage, missing implementations, or test status.
 license: Apache-2.0
 metadata:
