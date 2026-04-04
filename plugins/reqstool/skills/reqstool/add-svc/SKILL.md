@@ -1,5 +1,5 @@
 ---
-name: reqstool-add-svc
+name: reqstool:add-svc
 description: Add a new Software Verification Case (SVC) to the system-level SVCs file and update the relevant subproject filter. Use when the user wants to add a test scenario for a requirement.
 license: Apache-2.0
 metadata:

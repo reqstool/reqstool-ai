@@ -1,5 +1,5 @@
 ---
-name: reqstool-add-req
+name: reqstool:add-req
 description: Add a new requirement to the system-level requirements.yml and update the relevant subproject filter. Use when the user wants to add a new requirement.
 license: Apache-2.0
 metadata:

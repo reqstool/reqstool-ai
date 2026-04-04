@@ -1,5 +1,5 @@
 ---
-name: reqstool-init
+name: reqstool:init
 description: Create or update .reqstool-ai.yaml configuration for a project. Use when the user wants to initialize or reconfigure reqstool-ai settings.
 license: Apache-2.0
 metadata:
