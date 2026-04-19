@@ -98,7 +98,7 @@ modules:
 | `/reqstool:init` | Create or update `.reqstool-ai.yaml` configuration interactively |
 | `/reqstool:add-req` | Add a new requirement and update subproject filters |
 | `/reqstool:add-svc` | Add a new Software Verification Case and update filters |
-| `/reqstool:status` | Show requirements traceability status for system or a module |
+| `/reqstool:status` | Show requirements traceability status (uses MCP server if configured, falls back to CLI) |
 ### Skills (auto-applied)
 
 | When you're... | Skill |
@@ -129,7 +129,9 @@ Add a new Software Verification Case (SVC) to the system-level `software_verific
 
 ### `/reqstool:status`
 
-Run `reqstool status local` for the system or a specific module. Accepts an optional module name (e.g., `/reqstool:status core`); defaults to the system-level path from `.reqstool-ai.yaml`. Reqstool traverses imports and implementation config automatically.
+Show requirements traceability status for the system or a specific module. Accepts an optional module name (e.g., `/reqstool:status core`); defaults to the system-level path from `.reqstool-ai.yaml`.
+
+Uses the `reqstool` MCP server (`get_status` tool) when configured. Falls back to `reqstool status local` CLI if the server is not available, notifying you immediately when it does.
 
 ## Skill details
 
@@ -149,6 +151,25 @@ OpenSpec integration conventions, auto-applied when working with spec.md files:
 
 - **reqstool-openspec-conventions.md** — how to reference reqstool IDs in OpenSpec specs
 - **config-rules.yaml** — reqstool rules for openspec/config.yaml
+
+## MCP server
+
+The [reqstool MCP server](https://github.com/reqstool/reqstool-client) (reqstool ≥ 0.9.0) exposes structured tools for AI agents: `get_status`, `list_requirements`, `get_requirement_status`, and more.
+
+The `/reqstool:init` command can configure it automatically. To set it up manually, add to `.mcp.json` in your project root (project-scoped) or `~/.config/claude/mcp.json` (global):
+
+```json
+{
+  "mcpServers": {
+    "reqstool": {
+      "command": "reqstool",
+      "args": ["mcp", "local", "-p", "<your-system-path>"]
+    }
+  }
+}
+```
+
+When configured, skills like `/reqstool:status` use MCP for structured data. If the server is not available they fall back to `reqstool status local` automatically, notifying you when they do.
 
 ## Prerequisites
 

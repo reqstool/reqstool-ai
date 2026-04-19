@@ -83,9 +83,10 @@ For reqstool fundamentals (imports, filters, implementations), see `reqstool-ove
    Add the new requirement ID to the `filters.<urn>.requirement_ids.includes` list in the
    relevant module's `<module.path>/requirements.yml`.
 
-6. **Verify with reqstool**
+6. **Verify the new requirement is tracked**
 
-   Run `reqstool status local -p <module.path>` and confirm the new requirement appears.
+   - **If MCP is available**: call `get_requirement_status(<new_req_id>)` on the `reqstool` MCP server and confirm the requirement is returned.
+   - **Otherwise**: run `reqstool status local -p <module.path>` and confirm the new requirement appears.
 
 7. **Report**
 
