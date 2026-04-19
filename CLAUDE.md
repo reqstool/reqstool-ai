@@ -33,5 +33,3 @@ copilot plugin install --path ./plugins/reqstool-openspec
 ## Pre-commit checks
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full testing and contribution process.
-
-Run `claude plugin validate .` before committing to catch manifest errors, missing fields, and path issues.
