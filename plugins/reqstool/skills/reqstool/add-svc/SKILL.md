@@ -94,10 +94,10 @@ For reqstool fundamentals (imports, filters, implementations), see `reqstool-ove
    Add the new SVC ID to the `filters.<urn>.svc_ids.includes` list in the relevant module's
    `<module.path>/software_verification_cases.yml`.
 
-7. **Verify with reqstool**
+7. **Verify the new SVC is tracked**
 
-   Run `reqstool status local -p <module.path>` and confirm the new SVC appears
-   under the linked requirement.
+   - **If MCP is available**: call `get_svc(<new_svc_id>)` on the `reqstool` MCP server and confirm the SVC is returned.
+   - **Otherwise**: run `reqstool status local -p <module.path>` and confirm the new SVC appears under the linked requirement.
 
 8. **Report**
 

@@ -7,7 +7,7 @@ metadata:
   version: "1.0"
 ---
 
-Run `reqstool status local` for a reqstool directory in this project.
+Show requirements traceability status. Uses the reqstool MCP server if configured, falls back to the CLI.
 
 ---
 
@@ -30,7 +30,22 @@ Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
    - If the user is working inside a module directory (e.g., a Gradle subproject),
      ask whether they want to run status for that module or for the system level.
 
-3. **Run reqstool status**
+3. **Try MCP first**
+
+   Call the `reqstool` MCP server `get_status` tool.
+
+   - If it succeeds: present the returned status (requirements met/total, test summary).
+     Note: the MCP server always reflects the system-level path it was started with.
+     If the user asked for a specific module and the MCP result does not scope to that path,
+     note this limitation and proceed to the CLI fallback for the module path.
+
+4. **Fall back to CLI**
+
+   If the MCP server is not configured or the call fails, immediately tell the user:
+
+   > The reqstool MCP server is not configured — falling back to CLI.
+
+   Then run:
 
    ```bash
    reqstool status local -p <path>
@@ -39,14 +54,15 @@ Read `.reqstool-ai.yaml` — see `reqstool-conventions.md` for field reference.
    Show the output directly — reqstool traverses imports and implementation
    configuration automatically, so no further summarization is needed.
 
-4. **If reqstool is not installed**
+5. **If neither works**
 
-   If the command fails with "not found", tell the user:
-   ```
-   reqstool is not installed. Install with: pipx install reqstool
-   ```
+   If `reqstool` CLI is also not found, tell the user:
+
+   > Both the reqstool MCP server and CLI are unavailable.
+   > - To install the CLI: `pipx install reqstool`
+   > - To configure the MCP server: run `/reqstool:init`
 
 **Guardrails**
 - Always run from the project root directory
 - Do not modify any files — this is a read-only status command
-- Do not summarize or reformat reqstool output — show it as-is
+- Do not summarize or reformat reqstool CLI output — show it as-is

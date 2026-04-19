@@ -78,7 +78,37 @@ Create or update `.reqstool-ai.yaml` configuration for this project.
    structure, comments, and formatting. Replace placeholder values with the
    user's inputs and include only the modules the user defined.
 
-5. **Verify (if possible)**
+5. **Configure MCP server (optional)**
+
+   Offer to configure the reqstool MCP server (requires reqstool ≥ 0.9.0):
+
+   > The reqstool MCP server gives AI tools structured access to your requirements.
+   > Would you like me to add the MCP server configuration?
+
+   If yes, use **AskUserQuestion** to ask the scope:
+   - **Project** — `.mcp.json` in the project root (shared with the team via version control)
+   - **Global** — `~/.config/claude/mcp.json` (just for you, not committed)
+
+   Read the chosen file (create if missing) and add or update the `reqstool` entry:
+
+   ```json
+   {
+     "mcpServers": {
+       "reqstool": {
+         "command": "reqstool",
+         "args": ["mcp", "local", "-p", "<system.path>"]
+       }
+     }
+   }
+   ```
+
+   If the chosen file already has a `reqstool` entry, show it and ask before overwriting.
+
+   If `reqstool` is not yet installed, skip this step and tell the user:
+   > Install reqstool first (`pipx install reqstool`), then re-run `/reqstool:init`
+   > or add the MCP config manually.
+
+6. **Verify (if possible)**
 
    If `reqstool` CLI is installed **and** the system path contains existing reqstool files,
    run `reqstool status local -p <system.path>` to verify the config.
@@ -86,12 +116,13 @@ Create or update `.reqstool-ai.yaml` configuration for this project.
    If reqstool is not installed or files don't exist yet, skip verification and
    tell the user they can run `/reqstool:status` later once their reqstool files are in place.
 
-6. **Report**
+7. **Report**
 
    Show the user:
    - The created/updated config (print the file contents)
    - Whether this was a new file or an update
-   - Remind them to add `.reqstool-ai.yaml` to version control
+   - Whether the MCP server was configured and in which scope
+   - Remind them to add `.reqstool-ai.yaml` to version control (and `.mcp.json` if project-scoped)
    - Next steps: "Run `/reqstool:add-req` to add your first requirement,
      or `/reqstool:status` to check traceability status."
 
