@@ -3,17 +3,9 @@ name: Validate Plugins
 on:
   workflow_dispatch:
   pull_request:
-    paths:
-      - "plugins/**"
-      - ".claude-plugin/**"
-      - ".github/plugin/**"
   push:
     branches:
       - main
-    paths:
-      - "plugins/**"
-      - ".claude-plugin/**"
-      - ".github/plugin/**"
 
 jobs:
   validate:
