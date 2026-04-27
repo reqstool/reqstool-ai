@@ -154,7 +154,7 @@ OpenSpec integration conventions, auto-applied when working with spec.md files:
 
 ## MCP server
 
-The [reqstool MCP server](https://github.com/reqstool/reqstool-client) (reqstool ≥ 0.9.0) exposes structured tools for AI agents: `get_status`, `list_requirements`, `get_requirement_status`, and more.
+The [reqstool MCP server](https://github.com/reqstool/reqstool-client) (reqstool ≥ 0.10.0) exposes structured tools for AI agents: `get_status`, `list_requirements`, `get_requirement_status`, and more.
 
 The `/reqstool:init` command can configure it automatically. To set it up manually, add to `.mcp.json` in your project root (project-scoped) or `~/.config/claude/mcp.json` (global):
 
@@ -163,11 +163,13 @@ The `/reqstool:init` command can configure it automatically. To set it up manual
   "mcpServers": {
     "reqstool": {
       "command": "reqstool",
-      "args": ["mcp", "local", "-p", "<your-system-path>"]
+      "args": ["mcp"]
     }
   }
 }
 ```
+
+With no arguments, `reqstool mcp` walks up from cwd to find `.reqstool-ai.yaml` and serves the dataset at `system.path` from it — so the same `.mcp.json` works for every contributor regardless of where the repo is cloned. For older reqstool versions (or when no `.reqstool-ai.yaml` is present), pass an explicit path: `["mcp", "local", "-p", "<your-system-path>"]`.
 
 When configured, skills like `/reqstool:status` use MCP for structured data. If the server is not available they fall back to `reqstool status local` automatically, notifying you when they do.
 
