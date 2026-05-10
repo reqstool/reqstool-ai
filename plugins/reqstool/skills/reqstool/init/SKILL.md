@@ -80,7 +80,7 @@ Create or update `.reqstool-ai.yaml` configuration for this project.
 
 5. **Configure MCP server (optional)**
 
-   Offer to configure the reqstool MCP server (requires reqstool ≥ 0.9.0):
+   Offer to configure the reqstool MCP server (requires reqstool ≥ 0.10.0):
 
    > The reqstool MCP server gives AI tools structured access to your requirements.
    > Would you like me to add the MCP server configuration?
@@ -96,11 +96,15 @@ Create or update `.reqstool-ai.yaml` configuration for this project.
      "mcpServers": {
        "reqstool": {
          "command": "reqstool",
-         "args": ["mcp", "local", "-p", "<system.path>"]
+         "args": ["mcp"]
        }
      }
    }
    ```
+
+   `reqstool mcp` (no arguments) auto-detects the dataset by walking up from
+   the server's working directory to find `.reqstool-ai.yaml` and using its
+   `system.path` — so this same config is portable across contributors.
 
    If the chosen file already has a `reqstool` entry, show it and ask before overwriting.
 
