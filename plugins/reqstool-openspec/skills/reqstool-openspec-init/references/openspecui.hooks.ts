@@ -1,3 +1,4 @@
+// @reqstool-openspec-hooks: 0.1.0
 import { spawn, ChildProcess } from "child_process";
 import type { OnReadDocumentHookV1 } from "openspecui/hooks";
 
