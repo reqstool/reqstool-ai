@@ -1,4 +1,4 @@
-// @reqstool-openspec-hooks: 0.1.0
+// @reqstool-openspec-hooks: 0.1.1
 import { spawn, ChildProcess } from "child_process";
 import type { OnReadDocumentHookV1 } from "openspecui/hooks";
 
@@ -41,7 +41,9 @@ class McpStdioClient {
           msg.error ? p.reject(new Error(msg.error.message)) : p.resolve(msg.result);
         }
       }
-    } catch {}
+    } catch (e) {
+      console.warn("[reqstool-openspec] Skipping non-JSON line from reqstool mcp:", e instanceof Error ? e.message : e);
+    }
   }
 
   private send(method: string, params: unknown, expectReply = true): Promise<unknown> {
