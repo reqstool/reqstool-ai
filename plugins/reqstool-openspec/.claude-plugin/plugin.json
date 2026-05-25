@@ -1,7 +1,7 @@
 {
   "name": "reqstool-openspec",
   "description": "OpenSpec integration for reqstool — conventions for referencing reqstool IDs in OpenSpec files, plus an openspecui hook that enriches all OpenSpec documents with reqstool requirement/SVC titles and descriptions at read time.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "reqstool",
     "url": "https://github.com/reqstool"
