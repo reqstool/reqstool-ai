@@ -12,7 +12,7 @@ When changing a plugin, bump **both** versions so installed instances detect the
 
 Use semver: patch for docs/typo fixes, minor for new features or behavior changes, major for breaking changes.
 
-Keep both marketplace.json files in sync (`.claude-plugin/` for Claude Code, `.github/plugin/` for Copilot CLI).
+Keep both marketplace.json files in sync — `.claude-plugin/marketplace.json` is read by Claude Code, `.github/plugin/marketplace.json` is read by GitHub Copilot (which scans `.github/` for plugin manifests).
 
 ## Plugins
 
