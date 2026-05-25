@@ -8,6 +8,7 @@ When changing a plugin, bump **both** versions so installed instances detect the
 
 1. **Plugin version** — `plugins/<plugin>/.claude-plugin/plugin.json` → `"version"` field
 2. **Marketplace version** — `.claude-plugin/marketplace.json` and `.github/plugin/marketplace.json` → `metadata.version` field
+3. **Template version** — bump the `// @reqstool-openspec-hooks: X.Y.Z` header in `plugins/reqstool-openspec/skills/reqstool-openspec-init/references/openspecui.hooks.ts` on any change to that file
 
 Use semver: patch for docs/typo fixes, minor for new features or behavior changes, major for breaking changes.
 
