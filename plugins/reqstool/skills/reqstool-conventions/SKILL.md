@@ -15,3 +15,4 @@ convention files from this skill's references/ directory before making changes.
 - `references/reqstool-conventions.md` — overview of config fields, skill conventions, and pointers to the other docs
 - `references/reqstool-annotation-conventions.md` — where and how to place `@Requirements` and `@SVCs` annotations (Java, Python, TypeScript)
 - `references/reqstool-decomposition-conventions.md` — parent-child requirement hierarchies, dot-notation IDs, lifecycle states, prefix strategies
+- `references/reqstool-build-config-conventions.md` — build-tool/test-runner config required for reqstool to correctly map JUnit XML results to `@SVCs` methods (e.g. Gradle parameterized test display names)

@@ -142,6 +142,7 @@ Bundled convention docs that are auto-applied when working with reqstool files:
 - **reqstool-conventions.md** — overview of config fields and skill conventions
 - **reqstool-annotation-conventions.md** — `@Requirements` and `@SVCs` placement rules (Java, Python, TypeScript)
 - **reqstool-decomposition-conventions.md** — parent-child hierarchies, dot-notation IDs, lifecycle states
+- **reqstool-build-config-conventions.md** — build-tool/test-runner config for correct `@SVCs` test result mapping (e.g. Gradle parameterized test display names)
 
 ### reqstool-openspec (separate plugin)
 
