@@ -31,3 +31,6 @@ jobs:
           find . -name "*.json" \
             ! -path "./.git/*" \
             | xargs -I{} sh -c 'jq empty "{}" && echo "OK: {}"'
+
+      - name: Check skill reference docs are listed consistently
+        run: bash .github/scripts/check-skill-reference-docs.sh

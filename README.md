@@ -139,6 +139,7 @@ Uses the `reqstool` MCP server (`get_status` tool) when configured. Falls back t
 
 Bundled convention docs that are auto-applied when working with reqstool files:
 
+- **reqstool-overview.md** — what reqstool is, architecture (system/microservice/external), YAML files, imports, filters, implementations, CLI basics
 - **reqstool-conventions.md** — overview of config fields and skill conventions
 - **reqstool-annotation-conventions.md** — `@Requirements` and `@SVCs` placement rules (Java, Python, TypeScript)
 - **reqstool-decomposition-conventions.md** — parent-child hierarchies, dot-notation IDs, lifecycle states

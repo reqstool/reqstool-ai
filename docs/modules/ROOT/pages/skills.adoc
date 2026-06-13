@@ -53,6 +53,9 @@ Bundled convention docs that guide the AI assistant:
 |===
 | Reference file | Description
 
+| `reqstool-overview.md`
+| What reqstool is — architecture (system/microservice/external), YAML files, imports, filters, implementations, CLI basics
+
 | `reqstool-conventions.md`
 | Entry point — config reference, links to other convention docs
 
