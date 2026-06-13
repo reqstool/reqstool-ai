@@ -34,3 +34,14 @@ jobs:
 
       - name: Check skill reference docs are listed consistently
         run: bash .github/scripts/check-skill-reference-docs.sh
+
+      - name: Verify the consistency check fails on an undocumented reference doc
+        run: |
+          fixture=plugins/reqstool/skills/reqstool-conventions/references/__ci-fixture-undocumented.md
+          echo "fixture" > "$fixture"
+          if bash .github/scripts/check-skill-reference-docs.sh; then
+            echo "::error::expected check-skill-reference-docs.sh to fail for an undocumented reference file"
+            rm -f "$fixture"
+            exit 1
+          fi
+          rm -f "$fixture"
