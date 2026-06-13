@@ -13,6 +13,12 @@ When decomposing requirements into parent-child hierarchies, using lifecycle sta
 or working with dot-notation IDs, follow the conventions in
 `reqstool-decomposition-conventions.md`.
 
+## Build & Test Runner Configuration
+
+When configuring build tools or test runners so reqstool can correctly map test
+results to `@SVCs` annotations (e.g. parameterized test display names), follow
+`reqstool-build-config-conventions.md`.
+
 ## Configuration (`.reqstool-ai.yaml`)
 
 All skills read `.reqstool-ai.yaml` from the project root. It defines:
