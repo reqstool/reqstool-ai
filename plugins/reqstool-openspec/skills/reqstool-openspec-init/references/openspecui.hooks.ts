@@ -1,5 +1,6 @@
-// @reqstool-openspec-hooks: 0.1.1
-import { spawn, ChildProcess } from "child_process";
+// @reqstool-openspec-hooks: 0.1.3
+import { spawn } from "node:child_process";
+import type { ChildProcess } from "node:child_process";
 import type { OnReadDocumentHookV1 } from "openspecui/hooks";
 
 // Minimal MCP client over stdio (JSON-RPC 2.0, newline-delimited).
@@ -28,7 +29,16 @@ class McpStdioClient {
         if (line) this.handle(line);
       }
     });
+    this.proc.on("error", (err) => this.failPending(err));
+    this.proc.on("exit", (code, signal) =>
+      this.failPending(new Error(`reqstool mcp exited (code=${code}, signal=${signal})`)),
+    );
     this.ready = this.init();
+  }
+
+  private failPending(err: Error) {
+    for (const { reject } of this.pending.values()) reject(err);
+    this.pending.clear();
   }
 
   private handle(line: string) {
@@ -72,8 +82,12 @@ class McpStdioClient {
     const result = (await this.send("tools/call", {
       name: "enrich_document",
       arguments: { content, preset },
-    })) as { content: { text: string }[] };
-    return result.content[0].text;
+    })) as { content?: { text: string }[] };
+    const text = result.content?.[0]?.text;
+    if (text === undefined) {
+      throw new Error(`reqstool mcp returned an unexpected enrich_document response: ${JSON.stringify(result)}`);
+    }
+    return text;
   }
 
   close() {
