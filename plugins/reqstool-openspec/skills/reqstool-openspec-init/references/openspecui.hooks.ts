@@ -1,5 +1,6 @@
-// @reqstool-openspec-hooks: 0.1.2
-import { spawn, ChildProcess } from "child_process";
+// @reqstool-openspec-hooks: 0.1.3
+import { spawn } from "node:child_process";
+import type { ChildProcess } from "node:child_process";
 import type { OnReadDocumentHookV1 } from "openspecui/hooks";
 
 // Minimal MCP client over stdio (JSON-RPC 2.0, newline-delimited).
