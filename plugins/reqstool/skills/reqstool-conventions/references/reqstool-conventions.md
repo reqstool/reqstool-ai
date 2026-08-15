@@ -6,24 +6,36 @@ For an overview of reqstool concepts (architecture, imports, filters, implementa
 
 Three interfaces exist; use each for what it is good at:
 
-- **Look up** requirements, SVCs, and per-requirement status through the
-  reqstool MCP tools (`get_requirement`, `list_svcs`, `get_requirements_status`,
-  …) rather than reading whole YAML files — cheaper and more precise as the
-  requirement set grows.
+- **Query** through the reqstool MCP tools (`get_requirement`, `list_svcs`,
+  `get_requirements_status`, `get_status`, …) rather than reading whole YAML
+  files — cheaper and more precise as the requirement set grows. Status tools
+  derive from the same verdict computation as the CLI, so they agree with it on
+  the same inputs.
 - **Edit** the reqstool YAML files directly (they are the SSOT).
-- **Verify** only with the CLI gate (`reqstool status local -p <path>`), run
-  against a fresh full build. The CLI joins the YAML model with generated
-  annotation files and test results; a clean build matters because incremental
-  compilation can truncate generated annotation files.
+- **Verify** with the CLI gate (`reqstool status local -p <path>`), run against
+  a fresh full build. Its exit code is the number of unmet requirements, which
+  is what makes it the thing to put in CI and to cite as a verdict.
 
-Never cite MCP status output as a gate verdict: the MCP server loads
-everything — the YAML model *and* the generated annotation/test-result
-artifacts — once at startup, with no reload and no staleness detection. A
-long-lived server silently serves whatever snapshot existed when it spawned
-(including zeros, if artifacts were absent at that moment). A freshly spawned
-server against a fresh full build does match the CLI, but nothing tells you
-whether either condition holds, so treat its status tools as browsing aids
-until the server gains reload and staleness detection.
+Freshness is not the same as a build. Since reqstool 0.12.1 the MCP server
+re-checks the files it parsed before answering and reloads when they change, so
+a server left running for days no longer serves its spawn-time snapshot — but
+it re-reads artifacts, it does not produce them. Generated annotation files and
+JUnit XML on disk are only as current as the last build, and incremental
+compilation can truncate generated annotation files. So run a clean full build
+before treating any completeness number as real, whichever interface you read it
+from.
+
+When an MCP status answer looks wrong, check `snapshot` on `get_status`
+(`built_at`, `tracked_files`, `warnings`) before assuming the data is stale — a
+`test_results` pattern that matched no files is reported there rather than
+counted as zero tests. `refresh` forces a reload; needing it usually means the
+project is a remote source (git/maven/npm/pypi), which is version-pinned and
+therefore never watched.
+
+Older servers (reqstool < 0.12.1) do load everything once at startup with no
+reload and no staleness detection: a long-lived one silently serves whatever
+existed when it spawned, including zeros if the build had not run yet. Against
+those, MCP status is a browsing aid only.
 
 ## Source Code Annotations
 
