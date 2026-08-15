@@ -2,6 +2,29 @@
 
 For an overview of reqstool concepts (architecture, imports, filters, implementations), see `reqstool-overview.md`.
 
+## Tooling Division of Labor
+
+Three interfaces exist; use each for what it is good at:
+
+- **Look up** requirements, SVCs, and per-requirement status through the
+  reqstool MCP tools (`get_requirement`, `list_svcs`, `get_requirements_status`,
+  …) rather than reading whole YAML files — cheaper and more precise as the
+  requirement set grows.
+- **Edit** the reqstool YAML files directly (they are the SSOT).
+- **Verify** only with the CLI gate (`reqstool status local -p <path>`), run
+  against a fresh full build. The CLI joins the YAML model with generated
+  annotation files and test results; a clean build matters because incremental
+  compilation can truncate generated annotation files.
+
+Never cite MCP status output as a gate verdict: the MCP server loads
+everything — the YAML model *and* the generated annotation/test-result
+artifacts — once at startup, with no reload and no staleness detection. A
+long-lived server silently serves whatever snapshot existed when it spawned
+(including zeros, if artifacts were absent at that moment). A freshly spawned
+server against a fresh full build does match the CLI, but nothing tells you
+whether either condition holds, so treat its status tools as browsing aids
+until the server gains reload and staleness detection.
+
 ## Source Code Annotations
 
 When writing or modifying code with reqstool annotations (`@Requirements`, `@SVCs`),
