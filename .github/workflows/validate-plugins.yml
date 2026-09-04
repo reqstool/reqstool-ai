@@ -22,7 +22,7 @@ jobs:
 
       - name: Install Claude Code
         # renovate: datasource=npm depName=@anthropic-ai/claude-code
-        run: npm install -g @anthropic-ai/claude-code@2.1.252
+        run: npm install -g @anthropic-ai/claude-code@2.1.257
 
       - name: Validate marketplace manifest and plugins
         run: claude plugin validate .
