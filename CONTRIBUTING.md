@@ -42,7 +42,14 @@ claude plugin eval plugins/reqstool-openspec --scaffold --allow-tools Write Edit
 claude plugin eval plugins/reqstool --scaffold --allow-tools Write Edit --case add-req-child --runs 1 --ablation none
 ```
 
-Runs are billed to your Claude account. The *Plugin Evals* workflow runs the same suites in CI on manual dispatch and needs an `ANTHROPIC_API_KEY` repository secret.
+Runs are billed to your Claude account. The *Plugin Evals* workflow runs the same suites in CI. The repository holds no API key, so start it with the script, which stores your key as a `plugin-evals` environment secret for that one run and deletes it when the run ends:
+
+```bash
+.github/scripts/run-plugin-evals.sh                  # prompts for the key
+ANTHROPIC_API_KEY_FILE=~/path/to/key .github/scripts/run-plugin-evals.sh -f runs=1
+```
+
+A key with a spend limit that you revoke afterwards keeps the exposure to that one run.
 
 When you change a skill, run its cases; when you add a skill, add a case with a `skill-fired` grader and at least one grader on what the skill produces.
 
