@@ -8,7 +8,7 @@ reqstool is a requirements traceability tool that connects requirements (YAML) �
 
 CLI: `reqstool {status,report,export} {local,git,maven,pypi} -p <path>`
 
-`status` exit code = number of failures (0 = all requirements traced and verified).
+`status` exits 0 even when requirements are incomplete. Add `--check-all-reqs-met` before the source (`reqstool status --check-all-reqs-met local -p <path>`) to exit 200 when any requirement is incomplete.
 
 ## Architecture: system → microservice → external
 

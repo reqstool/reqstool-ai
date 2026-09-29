@@ -8,8 +8,8 @@ language-specific metadata that links code to requirements:
 | Language   | Mechanism        | Syntax |
 |------------|------------------|--------|
 | Java       | Annotations      | `@Requirements({"ID"})` / `@SVCs({"ID"})` |
-| Python     | Decorators       | `@requirements(["ID"])` / `@svcs(["ID"])` |
-| TypeScript | JSDoc tags       | `/** @requirements ID */` / `/** @svcs ID */` |
+| Python     | Decorators       | `@Requirements("ID")` / `@SVCs("ID")` |
+| TypeScript | JSDoc tags       | `/** @Requirements ID */` / `/** @SVCs ID */` |
 
 When you see "add annotations" in conventions or task lists, use the appropriate
 mechanism for your language.
