@@ -112,3 +112,6 @@ fabric.properties
 
 # Claude Code
 .claude/
+
+# claude plugin eval output
+plugins/*/evals/results/

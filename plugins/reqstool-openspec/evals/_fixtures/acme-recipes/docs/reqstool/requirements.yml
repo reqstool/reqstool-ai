@@ -1,0 +1,41 @@
+metadata:
+  urn: acme-recipes
+  variant: system
+  title: ACME Recipe Tool
+  url: https://example.com/acme-recipes
+
+implementations:
+  local:
+    - path: ../../core/docs/reqstool
+    - path: ../../cli/docs/reqstool
+
+requirements:
+  - id: CORE_0001
+    title: Recipe Discovery
+    significance: shall
+    description: The tool shall discover all recipes available on the project classpath
+    categories: [functional-suitability]
+    revision: 0.1.0
+
+  - id: CORE_0002
+    title: Classpath Resolution
+    significance: shall
+    description: The tool shall resolve the classpath of Maven and Gradle projects
+    categories: [functional-suitability, compatibility]
+    revision: 0.1.0
+
+  - id: CLI_0001
+    title: CLI Recipe Search
+    significance: shall
+    description: The tool shall search recipes by keyword via a CLI subcommand, with selectable output format
+    categories: [functional-suitability]
+    revision: 0.1.0
+
+  - id: CLI_0001.1
+    title: Search — Text Format
+    significance: shall
+    description: The search subcommand shall display matching recipes in human-readable text format
+    references:
+      requirement_ids: ["CLI_0001"]
+    categories: [functional-suitability]
+    revision: 0.1.0

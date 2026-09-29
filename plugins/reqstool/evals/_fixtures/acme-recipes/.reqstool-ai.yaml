@@ -1,0 +1,15 @@
+urn: acme-recipes
+revision: "0.2.0"
+
+system:
+  path: docs/reqstool
+
+modules:
+  core:
+    path: core/docs/reqstool
+    req_prefix: CORE_
+    svc_prefix: SVC_CORE_
+  cli:
+    path: cli/docs/reqstool
+    req_prefix: CLI_
+    svc_prefix: SVC_CLI_
