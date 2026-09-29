@@ -1,6 +1,6 @@
 # reqstool-ai
 
-Claude Code plugin marketplace for reqstool AI-assisted requirements traceability.
+Plugin marketplace (Claude Code and GitHub Copilot CLI) for reqstool AI-assisted requirements traceability.
 
 ## Versioning
 

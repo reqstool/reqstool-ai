@@ -213,7 +213,7 @@ reqstool-ai/
 │               ├── SKILL.md
 │               └── references/       # Bundled OpenSpec docs
 ├── docs/                             # Antora documentation
-├── CLAUDE.md
+├── AGENTS.md
 ├── README.md
 ├── CONTRIBUTING.md
 └── LICENSE
