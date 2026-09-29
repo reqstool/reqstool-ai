@@ -227,8 +227,8 @@ claude --plugin-dir ./plugins/reqstool
 claude --plugin-dir ./plugins/reqstool-openspec
 
 # Copilot CLI
-copilot plugin install --path ./plugins/reqstool
-copilot plugin install --path ./plugins/reqstool-openspec
+copilot --plugin-dir ./plugins/reqstool
+copilot --plugin-dir ./plugins/reqstool-openspec
 ```
 
 ## Updating
