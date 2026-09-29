@@ -50,6 +50,6 @@ When you change a skill, run its cases; when you add a skill, add a case with a 
 
 1. Make your changes in `plugins/reqstool/` or `plugins/reqstool-openspec/`.
 2. Bump the version in the changed plugin's `.claude-plugin/plugin.json`.
-3. Bump `metadata.version` in both `.claude-plugin/marketplace.json` and `.github/plugin/marketplace.json`.
+3. Bump `metadata.version` in `.claude-plugin/marketplace.json`.
 4. Test locally.
 5. Submit a PR.
