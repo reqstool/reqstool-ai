@@ -1,5 +1,5 @@
 ---
-name: reqstool-openspec:init
+name: init
 description: Install the openspecui reqstool hook into this project. Writes openspec/openspecui.hooks.ts so openspecui enriches all OpenSpec documents (spec, changes, and archived) with reqstool requirement/SVC titles and descriptions at read time.
 license: Apache-2.0
 metadata:

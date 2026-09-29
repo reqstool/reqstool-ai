@@ -185,31 +185,30 @@ When configured, skills like `/reqstool:status` use MCP for structured data. If 
 ```
 reqstool-ai/
 ├── .claude-plugin/
-│   └── marketplace.json              # Claude Code marketplace manifest
-├── .github/
-│   └── plugin/
-│       └── marketplace.json          # Copilot CLI marketplace manifest
+│   └── marketplace.json              # Marketplace manifest (Claude Code and Copilot CLI)
 ├── plugins/
 │   ├── reqstool/                     # Core plugin
 │   │   ├── .claude-plugin/
 │   │   │   └── plugin.json
-│   │   ├── skills/
-│   │   │   ├── reqstool-init/
-│   │   │   │   ├── SKILL.md
-│   │   │   │   └── references/
-│   │   │   │       └── reqstool-ai.yaml.template
-│   │   │   ├── reqstool-add-req/
-│   │   │   ├── reqstool-add-svc/
-│   │   │   ├── reqstool-status/
-│   │   │   └── reqstool-conventions/
-│   │   │       ├── SKILL.md
-│   │   │       └── references/       # Bundled convention docs
-│   │   └── commands/
-│   │       └── reqstool/
+│   │   └── skills/
+│   │       ├── init/
+│   │       │   ├── SKILL.md
+│   │       │   └── references/
+│   │       │       └── reqstool-ai.yaml.template
+│   │       ├── add-req/
+│   │       ├── add-svc/
+│   │       ├── status/
+│   │       └── reqstool-conventions/
+│   │           ├── SKILL.md
+│   │           └── references/       # Bundled convention docs
 │   └── reqstool-openspec/            # OpenSpec integration plugin
 │       ├── .claude-plugin/
 │       │   └── plugin.json
 │       └── skills/
+│           ├── init/
+│           │   ├── SKILL.md
+│           │   └── references/
+│           │       └── openspecui.hooks.ts
 │           └── reqstool-openspec/
 │               ├── SKILL.md
 │               └── references/       # Bundled OpenSpec docs

@@ -16,9 +16,10 @@ Three interfaces exist; use each for what it is good at:
   computation the CLI uses, so on the same inputs they return the same answer.
   Use `get_requirements_status` to find what is still unimplemented or untested
   instead of shelling out repeatedly.
-- **Gate** with the CLI (`reqstool status local -p <path>`), run against a fresh
-  full build. Same verdict, but its exit code is the number of unmet
-  requirements — so it is the form that belongs in CI and the one to cite.
+- **Gate** with the CLI (`reqstool status --check-all-reqs-met local -p <path>`),
+  run against a fresh full build. Same verdict, but it exits non-zero (200) when
+  any requirement is unmet — so it is the form that belongs in CI and the one to
+  cite. Without `--check-all-reqs-met` it always exits 0.
 
 Checking and gating are separated for reasons of provenance, not of
 correctness — MCP status is not the weaker number. A gate has to run where there
