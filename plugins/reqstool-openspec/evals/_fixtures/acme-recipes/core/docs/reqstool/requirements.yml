@@ -1,0 +1,13 @@
+metadata:
+  urn: acme-recipes-core
+  variant: microservice
+  title: ACME Recipe Tool — core
+
+imports:
+  local:
+    - path: ../../../docs/reqstool
+
+filters:
+  acme-recipes:
+    requirement_ids:
+      includes: [CORE_0001, CORE_0002]

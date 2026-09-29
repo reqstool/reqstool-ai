@@ -1,0 +1,6 @@
+filters:
+  acme-recipes:
+    svc_ids:
+      includes: [SVC_CORE_0001]
+
+cases: []

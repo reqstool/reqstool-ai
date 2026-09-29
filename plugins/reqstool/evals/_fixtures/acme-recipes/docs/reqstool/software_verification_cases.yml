@@ -1,0 +1,30 @@
+cases:
+  - id: SVC_CORE_0001
+    requirement_ids: ["CORE_0001"]
+    title: Discover all recipes from classpath
+    verification: automated-test
+    description: |
+      GIVEN a project with recipes on the classpath
+      WHEN discovery runs
+      THEN every available recipe is returned
+    revision: "0.1.0"
+
+  - id: SVC_CLI_0001
+    requirement_ids: ["CLI_0001"]
+    title: Search recipes via CLI
+    verification: automated-test
+    description: |
+      GIVEN recipes on the classpath
+      WHEN the user runs `acme search <query>`
+      THEN matching recipes are returned in the selected format
+    revision: "0.1.0"
+
+  - id: SVC_CLI_0001.1
+    requirement_ids: ["CLI_0001.1"]
+    title: Search prints text output
+    verification: automated-test
+    description: |
+      GIVEN recipes on the classpath
+      WHEN the user runs `acme search <query> --format text`
+      THEN matching recipes are printed as human-readable text
+    revision: "0.1.0"
