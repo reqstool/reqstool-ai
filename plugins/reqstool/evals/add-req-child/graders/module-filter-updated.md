@@ -2,7 +2,7 @@
 type: regex
 target:
   source: file
-  path: cli/docs/reqstool/requirements.yml
-pattern: 'CLI_0001\.2\b'
+  path: core/docs/reqstool/requirements.yml
+pattern: 'CORE_0002\.1\b'
 weight: 2
 ---

@@ -2,7 +2,7 @@
 type: regex
 target:
   source: file
-  path: cli/docs/reqstool/requirements.yml
-pattern: 'id:\s*CLI_0001\.2'
+  path: core/docs/reqstool/requirements.yml
+pattern: 'id:\s*CORE_0002\.1'
 match: not_contains
 ---
