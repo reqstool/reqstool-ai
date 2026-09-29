@@ -1,6 +1,7 @@
 name: Plugin Evals
 
-# Manual only: every run is billed to the ANTHROPIC_API_KEY secret.
+# Manual only, via .github/scripts/run-plugin-evals.sh: it sets the
+# ANTHROPIC_API_KEY environment secret for one run and deletes it afterwards.
 on:
   workflow_dispatch:
     inputs:
@@ -20,6 +21,7 @@ permissions:
 jobs:
   eval:
     runs-on: ubuntu-latest
+    environment: plugin-evals
     strategy:
       fail-fast: false
       matrix:
