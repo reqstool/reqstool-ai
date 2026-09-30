@@ -35,8 +35,8 @@ copilot --plugin-dir ./plugins/reqstool-openspec
 Each plugin has an eval suite under `plugins/<plugin>/evals/` that scores its skills against a no-plugin baseline with [`claude plugin eval`](https://code.claude.com/docs/en/plugin-evals). Cases seed their workspace from `evals/_fixtures/` with a scaffold script, so `--scaffold` is required, and the file-editing skills need `Write` and `Edit` granted:
 
 ```bash
-claude plugin eval plugins/reqstool --scaffold --allow-tools Write Edit --threshold 0.9
-claude plugin eval plugins/reqstool-openspec --scaffold --allow-tools Write Edit --threshold 0.9
+claude plugin eval plugins/reqstool --scaffold --allow-tools Write Edit --threshold 0.9 --judge-model sonnet
+claude plugin eval plugins/reqstool-openspec --scaffold --allow-tools Write Edit --threshold 0.9 --judge-model sonnet
 
 # Iterate on one case, one run, no baseline arm
 claude plugin eval plugins/reqstool --scaffold --allow-tools Write Edit --case add-req-child --runs 1 --ablation none
@@ -46,7 +46,7 @@ Evals run locally only: there is no CI workflow for them, and the repository hol
 
 Each case runs 3 times by default. `--threshold 0.9` fails a case when a grader fails in every run but tolerates a single miss in one run, as long as a case's scored grader weights add up to at most 9.
 
-When you change a skill, run its cases; when you add a skill, add a case with a `skill-fired` grader and at least one grader on what the skill produces.
+When you change a skill, run its cases; when you add a skill, add a case with a `skill-fired` grader and at least one grader on what the skill produces, and a case tagged `negative` where the skill must not fire. `--judge-model sonnet` because the default Haiku judge misses nuance in the `llm` graders.
 
 ## Adding or updating plugin content
 
