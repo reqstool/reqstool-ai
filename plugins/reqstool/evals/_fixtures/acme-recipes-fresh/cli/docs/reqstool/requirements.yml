@@ -1,0 +1,13 @@
+metadata:
+  urn: acme-recipes-cli
+  variant: microservice
+  title: ACME Recipe Tool — cli
+
+imports:
+  local:
+    - path: ../../../docs/reqstool
+
+filters:
+  acme-recipes:
+    requirement_ids:
+      includes: [CLI_0001]
