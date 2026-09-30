@@ -33,7 +33,7 @@ copilot --plugin-dir ./plugins/reqstool-openspec
 
 ## Plugin evals
 
-The repository holds no Anthropic API key; never add an `ANTHROPIC_API_KEY` repository secret. Run the *Plugin Evals* workflow with `.github/scripts/run-plugin-evals.sh`, which sets the key as a `plugin-evals` environment secret for that one run and deletes it afterwards. See [CONTRIBUTING.md](CONTRIBUTING.md#evals).
+Evals run locally only; there is no CI workflow for them. Never add an `ANTHROPIC_API_KEY` secret to the repository. See [CONTRIBUTING.md](CONTRIBUTING.md#evals).
 
 ## Pre-commit checks
 

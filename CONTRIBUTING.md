@@ -35,21 +35,16 @@ copilot --plugin-dir ./plugins/reqstool-openspec
 Each plugin has an eval suite under `plugins/<plugin>/evals/` that scores its skills against a no-plugin baseline with [`claude plugin eval`](https://code.claude.com/docs/en/plugin-evals). Cases seed their workspace from `evals/_fixtures/` with a scaffold script, so `--scaffold` is required, and the file-editing skills need `Write` and `Edit` granted:
 
 ```bash
-claude plugin eval plugins/reqstool --scaffold --allow-tools Write Edit
-claude plugin eval plugins/reqstool-openspec --scaffold --allow-tools Write Edit
+claude plugin eval plugins/reqstool --scaffold --allow-tools Write Edit --threshold 0.9
+claude plugin eval plugins/reqstool-openspec --scaffold --allow-tools Write Edit --threshold 0.9
 
 # Iterate on one case, one run, no baseline arm
 claude plugin eval plugins/reqstool --scaffold --allow-tools Write Edit --case add-req-child --runs 1 --ablation none
 ```
 
-Runs are billed to your Claude account. The *Plugin Evals* workflow runs the same suites in CI. The repository holds no API key, so start it with the script, which stores your key as a `plugin-evals` environment secret for that one run and deletes it when the run ends:
+Evals run locally only: there is no CI workflow for them, and the repository holds no API key. Runs count against your Claude plan's usage, or are billed if you are logged in with an API key.
 
-```bash
-.github/scripts/run-plugin-evals.sh                  # prompts for the key
-ANTHROPIC_API_KEY_FILE=~/path/to/key .github/scripts/run-plugin-evals.sh -f runs=1
-```
-
-A key with a spend limit that you revoke afterwards keeps the exposure to that one run.
+Each case runs 3 times by default. `--threshold 0.9` fails a case when a grader fails in every run but tolerates a single miss in one run, as long as a case's scored grader weights add up to at most 9.
 
 When you change a skill, run its cases; when you add a skill, add a case with a `skill-fired` grader and at least one grader on what the skill produces.
 
