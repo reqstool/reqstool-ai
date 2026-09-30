@@ -4,12 +4,20 @@ For an overview of reqstool concepts (architecture, imports, filters, implementa
 
 ## Tooling Division of Labor
 
-Three interfaces exist; use each for what it is good at:
+Besides the YAML files themselves, reqstool has three interfaces — MCP, the LSP
+server and the CLI; use each for what it is good at:
 
 - **Query** through the reqstool MCP tools (`get_requirement`, `list_svcs`,
   `get_requirements_status`, `get_status`, …) rather than reading whole YAML
   files — cheaper and more precise as the requirement set grows.
 - **Edit** the reqstool YAML files directly (they are the SSOT).
+- **Validate** references as you edit with the reqstool LSP server
+  (`reqstool lsp`), where your editor or harness runs it. It reports unknown
+  requirement or SVC IDs in `@Requirements`/`@SVCs` annotations as errors,
+  deprecated or obsolete ones as warnings, and YAML parse and schema errors; it
+  also completes IDs and resolves definitions and references between
+  annotations and YAML. It checks that references are valid, not that
+  requirements are met, so it does not replace the status check.
 - **Check** completeness with the MCP status tools while you work. They are a
   real check, not a browsing aid: `get_status`, `get_requirement_status`, and
   `get_requirements_status` all delegate to the same per-requirement verdict
@@ -26,6 +34,10 @@ correctness — MCP status is not the weaker number. A gate has to run where the
 is no agent and no MCP client, has to leave an artifact someone else can
 reproduce, and re-parses from a cold start rather than confirming the world-view
 your session has been operating under all along.
+
+In short: the LSP answers "is this reference valid?" while you type, MCP answers
+"what is still unmet?" between edits, and the CLI answers "is it done?" once,
+from a cold start, where no agent runs.
 
 Freshness is not the same as a build. Since reqstool 0.12.1 the MCP server
 re-checks the files it parsed before answering and reloads when they change, so
