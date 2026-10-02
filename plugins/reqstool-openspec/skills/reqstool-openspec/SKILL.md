@@ -1,6 +1,6 @@
 ---
 name: reqstool-openspec
-description: OpenSpec + reqstool integration conventions. Auto-applied when working with OpenSpec spec.md files that reference reqstool requirement or SVC IDs.
+description: Conventions for referencing reqstool requirement and SVC IDs in OpenSpec documents. Use only when an OpenSpec spec.md, proposal or tasks.md references reqstool IDs (such as CORE_0001 or SVC_CORE_0001) or the project has a .reqstool-ai.yaml; not for OpenSpec work in projects without reqstool.
 license: Apache-2.0
 allowed-tools: Read, Grep, Glob
 metadata:
