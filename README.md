@@ -154,6 +154,8 @@ OpenSpec integration conventions, auto-applied when working with spec.md files:
 - **reqstool-openspec-conventions.md** — how to reference reqstool IDs in OpenSpec specs
 - **config-rules.yaml** — reqstool rules for openspec/config.yaml
 
+Upgrading from 1.0.x: OpenSpec CLI 1.16+ rejects the old one-line scenario stub. See "Migrating from the one-line stub" in `reqstool-openspec-conventions.md`. The openspecui hook hides the new placeholder steps with a reqstool release newer than 1.0.0.
+
 ## MCP server
 
 The [reqstool MCP server](https://github.com/reqstool/reqstool-client) (reqstool ≥ 0.10.0) exposes structured tools for AI agents: `get_status`, `list_requirements`, `get_requirement_status`, and more.

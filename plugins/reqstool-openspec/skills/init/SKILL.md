@@ -30,3 +30,4 @@ Install or upgrade the reqstool openspecui hook in this project.
    - `reqstool` must be on PATH (install via `pipx install reqstool`)
    - The hook auto-detects `.reqstool-ai.yaml` by walking up from the project dir
    - Add `openspec/openspecui.hooks.ts` to version control
+   - Hiding the `WHEN <SVC_ID> is run` / `THEN it passes` placeholder steps needs a reqstool release newer than 1.0.0 (reqstool/reqstool-client#484); older releases show them under each enriched SVC

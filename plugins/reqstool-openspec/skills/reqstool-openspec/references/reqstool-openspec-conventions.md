@@ -112,6 +112,16 @@ The system SHALL implement CORE_0002.
 - **THEN** it passes
 ```
 
+### Migrating from the one-line stub
+
+Up to plugin 1.0.x each scenario held one line, `The system SHALL pass <SVC_ID>.`, which strict
+validation rejects from OpenSpec CLI 1.16 on. To migrate a project:
+
+1. In `openspec/config.yaml`, replace the reqstool `specs:` rules with the current ones from `config-rules.yaml`.
+2. Run `openspec validate --all --strict`, and in each spec.md it reports, replace every
+   `The system SHALL pass <SVC_ID>.` line with `- **WHEN** <SVC_ID> is run` and `- **THEN** it passes`.
+3. Run the validation again until it passes.
+
 ## Task Generation: Annotation Tasks
 
 When generating implementation tasks (e.g., `tasks.md`) from a `spec.md` that references
