@@ -13,7 +13,7 @@
 #     - "reqstool is SSOT: NEVER duplicate requirement text or GIVEN/WHEN/THEN scenarios"
 #     - "Follow conventions in the reqstool-openspec skill conventions"
 #     - "Use ### Requirement: <ID> with 'The system SHALL implement <ID>.'"
-#     - "Use #### Scenario: <SVC_ID> with 'The system SHALL pass <SVC_ID>.'"
+#     - "Use #### Scenario: <SVC_ID> with the steps '- **WHEN** <SVC_ID> is run' and '- **THEN** it passes'"
 #     - "IDs only — no file paths. Use reqstool CLI to look up details."
 #     - "Validate with: openspec validate --all --strict"
 #   tasks:
@@ -23,6 +23,6 @@ specs:
   - "reqstool is SSOT: NEVER duplicate requirement text or GIVEN/WHEN/THEN scenarios"
   - "Follow conventions in the reqstool-openspec skill conventions"
   - "Use ### Requirement: <ID> with 'The system SHALL implement <ID>.'"
-  - "Use #### Scenario: <SVC_ID> with 'The system SHALL pass <SVC_ID>.'"
+  - "Use #### Scenario: <SVC_ID> with the steps '- **WHEN** <SVC_ID> is run' and '- **THEN** it passes'"
   - "IDs only — no file paths. Use reqstool CLI to look up details."
   - "Validate with: openspec validate --all --strict"

@@ -14,5 +14,10 @@ read the convention files from this skill's references/ directory.
 - `references/reqstool-openspec-conventions.md` — how to reference reqstool IDs in spec.md files, format rules, validation
 - `references/config-rules.yaml` — reqstool rules to add to openspec/config.yaml
 
+Before allocating new requirement or SVC IDs, for example while drafting a proposal or a spec
+delta, load the reqstool plugin's `reqstool-conventions` skill, and add the IDs with its
+`add-req` and `add-svc` skills. ID structure, decomposition and SVC mirroring are defined there,
+not here.
+
 If `openspec/openspecui.hooks.ts` does not exist in the project root, proactively suggest:
 > Run `/reqstool-openspec:init` to install the reqstool openspecui hook, which automatically enriches all OpenSpec documents with requirement and SVC titles at read time.

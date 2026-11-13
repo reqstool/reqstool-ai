@@ -5,7 +5,7 @@
     "url": "https://github.com/reqstool"
   },
   "metadata": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "AI-assisted reqstool requirements traceability — skills and commands for managing requirements, SVCs, and filters, with optional OpenSpec integration."
   },
   "plugins": [
