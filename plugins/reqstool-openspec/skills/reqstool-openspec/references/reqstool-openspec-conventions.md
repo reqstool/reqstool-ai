@@ -4,7 +4,9 @@
 
 reqstool owns all requirements and verification scenarios (GIVEN/WHEN/THEN).
 OpenSpec spec.md files reference reqstool IDs — they NEVER duplicate requirement
-descriptions or scenario steps.
+descriptions or scenario steps. The only steps a spec.md carries are the fixed
+`WHEN <SVC_ID> is run` / `THEN it passes` placeholders that strict validation needs
+(see spec.md Format).
 
 ## How to look up requirements and SVCs
 
@@ -167,7 +169,7 @@ traceability chain: reqstool can only verify coverage when annotations are prese
 
 ## Rules
 
-1. **DRY**: Never duplicate requirement descriptions or GIVEN/WHEN/THEN from reqstool
+1. **DRY**: Never duplicate requirement descriptions or GIVEN/WHEN/THEN from reqstool; the fixed placeholder steps in rule 2 are the only steps allowed
 2. **SHALL and steps**: Every requirement MUST contain the word SHALL, and every scenario MUST have the steps `- **WHEN** <SVC_ID> is run` and `- **THEN** it passes` (required by `openspec validate --strict`)
 3. **IDs only**: Reference requirement IDs and SVC IDs — do not include file paths or descriptions
 4. **One requirement per `### Requirement:` header**: Use the reqstool ID as the header name
