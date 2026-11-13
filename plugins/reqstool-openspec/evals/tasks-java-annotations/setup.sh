@@ -9,8 +9,10 @@ cat > openspec/changes/add-gradle-support/specs/classpath/spec.md <<'EOF'
 The system SHALL implement CORE_0002.
 
 #### Scenario: SVC_CORE_0002.1
-The system SHALL pass SVC_CORE_0002.1.
+- **WHEN** SVC_CORE_0002.1 is run
+- **THEN** it passes
 
 #### Scenario: SVC_CORE_0002.2
-The system SHALL pass SVC_CORE_0002.2.
+- **WHEN** SVC_CORE_0002.2 is run
+- **THEN** it passes
 EOF

@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: proposal-new-ids-without-reqstool-plugin
+context:
+  scaffold_script: setup.sh

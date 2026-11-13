@@ -4,7 +4,9 @@
 
 reqstool owns all requirements and verification scenarios (GIVEN/WHEN/THEN).
 OpenSpec spec.md files reference reqstool IDs — they NEVER duplicate requirement
-descriptions or scenario steps.
+descriptions or scenario steps. The only steps a spec.md carries are the fixed
+`WHEN <SVC_ID> is run` / `THEN it passes` placeholders that strict validation needs
+(see spec.md Format).
 
 ## How to look up requirements and SVCs
 
@@ -32,7 +34,9 @@ The JSON output contains:
 
 ## spec.md Format
 
-Reference requirement and SVC IDs only. The word SHALL is required by OpenSpec strict validation.
+Reference requirement and SVC IDs only. OpenSpec strict validation requires the word SHALL in
+every requirement, and from CLI 1.16 on a WHEN or GIVEN step and a THEN step in every scenario.
+The two scenario steps only satisfy that check; the real GIVEN/WHEN/THEN stays in reqstool.
 
 ```markdown
 ## ADDED Requirements
@@ -41,7 +45,8 @@ Reference requirement and SVC IDs only. The word SHALL is required by OpenSpec s
 The system SHALL implement <REQUIREMENT_ID>.
 
 #### Scenario: <SVC_ID>
-The system SHALL pass <SVC_ID>.
+- **WHEN** <SVC_ID> is run
+- **THEN** it passes
 ```
 
 ### Multiple scenarios under one requirement
@@ -51,10 +56,12 @@ The system SHALL pass <SVC_ID>.
 The system SHALL implement CORE_0002.
 
 #### Scenario: SVC_CORE_0002.1
-The system SHALL pass SVC_CORE_0002.1.
+- **WHEN** SVC_CORE_0002.1 is run
+- **THEN** it passes
 
 #### Scenario: SVC_CORE_0002.2
-The system SHALL pass SVC_CORE_0002.2.
+- **WHEN** SVC_CORE_0002.2 is run
+- **THEN** it passes
 ```
 
 ### Parent requirement with children
@@ -67,19 +74,22 @@ list the parent and its children together:
 The system SHALL implement CLI_0004.
 
 #### Scenario: SVC_CLI_0004
-The system SHALL pass SVC_CLI_0004.
+- **WHEN** SVC_CLI_0004 is run
+- **THEN** it passes
 
 ### Requirement: CLI_0004.1
 The system SHALL implement CLI_0004.1.
 
 #### Scenario: SVC_CLI_0004.1
-The system SHALL pass SVC_CLI_0004.1.
+- **WHEN** SVC_CLI_0004.1 is run
+- **THEN** it passes
 
 ### Requirement: CLI_0004.2
 The system SHALL implement CLI_0004.2.
 
 #### Scenario: SVC_CLI_0004.2
-The system SHALL pass SVC_CLI_0004.2.
+- **WHEN** SVC_CLI_0004.2 is run
+- **THEN** it passes
 ```
 
 ### Multiple requirements
@@ -91,14 +101,26 @@ The system SHALL pass SVC_CLI_0004.2.
 The system SHALL implement CORE_0001.
 
 #### Scenario: SVC_CORE_0001
-The system SHALL pass SVC_CORE_0001.
+- **WHEN** SVC_CORE_0001 is run
+- **THEN** it passes
 
 ### Requirement: CORE_0002
 The system SHALL implement CORE_0002.
 
 #### Scenario: SVC_CORE_0002
-The system SHALL pass SVC_CORE_0002.
+- **WHEN** SVC_CORE_0002 is run
+- **THEN** it passes
 ```
+
+### Migrating from the one-line stub
+
+Up to plugin 1.0.x each scenario held one line, `The system SHALL pass <SVC_ID>.`, which strict
+validation rejects from OpenSpec CLI 1.16 on. To migrate a project:
+
+1. In `openspec/config.yaml`, replace the reqstool `specs:` rules with the current ones from `config-rules.yaml`.
+2. Run `openspec validate --all --strict`, and in each spec.md it reports, replace every
+   `The system SHALL pass <SVC_ID>.` line with `- **WHEN** <SVC_ID> is run` and `- **THEN** it passes`.
+3. Run the validation again until it passes.
 
 ## Task Generation: Annotation Tasks
 
@@ -126,7 +148,8 @@ Given this spec.md:
 The system SHALL implement CORE_0001.
 
 #### Scenario: SVC_CORE_0001
-The system SHALL pass SVC_CORE_0001.
+- **WHEN** SVC_CORE_0001 is run
+- **THEN** it passes
 ```
 
 The generated tasks should include annotation tasks alongside the implementation and test
@@ -156,8 +179,8 @@ traceability chain: reqstool can only verify coverage when annotations are prese
 
 ## Rules
 
-1. **DRY**: Never duplicate requirement descriptions or GIVEN/WHEN/THEN from reqstool
-2. **SHALL**: Every requirement and scenario MUST contain the word SHALL (required by `openspec validate --strict`)
+1. **DRY**: Never duplicate requirement descriptions or GIVEN/WHEN/THEN from reqstool; the fixed placeholder steps in rule 2 are the only steps allowed
+2. **SHALL and steps**: Every requirement MUST contain the word SHALL, and every scenario MUST have the steps `- **WHEN** <SVC_ID> is run` and `- **THEN** it passes` (required by `openspec validate --strict`)
 3. **IDs only**: Reference requirement IDs and SVC IDs — do not include file paths or descriptions
 4. **One requirement per `### Requirement:` header**: Use the reqstool ID as the header name
 5. **One scenario per `#### Scenario:` header**: Use the reqstool SVC ID as the header name
