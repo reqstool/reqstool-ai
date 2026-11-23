@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+inheritance: true
+
+reviews:
+  path_instructions:
+    - path: "plugins/**"
+      instructions: |
+        A plugin change bumps both plugins/<plugin>/.claude-plugin/plugin.json
+        and metadata.version in .claude-plugin/marketplace.json, using semver.
+    - path: "plugins/reqstool-openspec/skills/init/references/openspecui.hooks.ts"
+      instructions: |
+        Any change bumps the `@reqstool-openspec-hooks: X.Y.Z` header.
+    - path: ".github/workflows/**"
+      instructions: |
+        Plugin evals run locally only. Flag any workflow or secret that runs
+        them in CI or adds ANTHROPIC_API_KEY.
