@@ -9,7 +9,10 @@ server and the CLI; use each for what it is good at:
 
 - **Query** through the reqstool MCP tools (`get_requirement`, `list_svcs`,
   `get_requirements_status`, `get_status`, …) rather than reading whole YAML
-  files — cheaper and more precise as the requirement set grows.
+  files — cheaper and more precise as the requirement set grows. To find
+  requirements, SVCs or MVRs by topic ("which requirements are about erasure?"),
+  use the `search` tool (reqstool ≥ 1.1.0) instead of listing everything and
+  reading it all.
 - **Edit** the reqstool YAML files directly (they are the SSOT).
 - **Validate** references as you edit with the reqstool LSP server
   (`reqstool lsp`), where your editor or harness runs it. It reports unknown
